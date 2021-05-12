@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="../../../../Users/Me/Desktop/Pycharm/PycharmProjects/DTC201-git/TempStone.tsx"/>
+ <tileset firstgid="2" source="images/Tileset_Tiles.tsx"/>
+ <layer id="1" name="Platforms" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENACAMA8GI/YemoqNFDnAneQNXXwUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJI3HBgAAAADwC320t3Qv19wBAAAAWLSf/nS6e6S7rY8AAAAAp6Qbh+03AQ69AgE=
+  </data>
+ </layer>
+</map>

@@ -72,7 +72,7 @@ class PlayerCharacter(arcade.Sprite):
         # Images from Kenney.nl's Asset Pack 3
         # main_path = ":resources:images/animated_characters/female_adventurer/femaleAdventurer"
         # main_path = ":resources:images/animated_characters/female_person/femalePerson"
-        main_path = ":resources:images/animated_characters/male_person/malePerson"
+        main_path = "maps/images/player/Person"
         # main_path = ":resources:images/animated_characters/male_adventurer/maleAdventurer"
         # main_path = ":resources:images/animated_characters/zombie/zombie"
         # main_path = ":resources:images/animated_characters/robot/robot"
@@ -197,9 +197,9 @@ class MyGame(arcade.Window):
         self.score = 0
 
         # Load sounds
-        self.collect_coin_sound = arcade.load_sound(":resources:sounds/coin1.wav")
-        self.jump_sound = arcade.load_sound(":resources:sounds/jump1.wav")
-        self.game_over = arcade.load_sound(":resources:sounds/gameover1.wav")
+        self.collect_coin_sound = arcade.load_sound("sounds/coin1.wav")
+        self.jump_sound = arcade.load_sound("sounds/jump1.wav")
+        self.game_over = arcade.load_sound("sounds/gameover1.wav")
 
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
@@ -237,7 +237,7 @@ class MyGame(arcade.Window):
         dont_touch_layer_name = "Don't Touch"
 
         # Map name
-        map_name = f"maps/map2_level_{level}.tmx"
+        map_name = f"maps/map_level_{level}.tmx"
 
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
