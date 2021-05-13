@@ -1,7 +1,5 @@
 """
 Platformer Game
-
-python -m arcade.examples.platform_tutorial.11_animate_character
 """
 import arcade
 import os
@@ -9,7 +7,7 @@ import os
 # Constants
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
-SCREEN_TITLE = "Platformer"
+SCREEN_TITLE = "Robot Platformer"
 
 # Constants used to scale our sprites from their original size
 TILE_SCALING = 0.5
@@ -25,8 +23,8 @@ PLAYER_JUMP_SPEED = 30
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
-LEFT_VIEWPORT_MARGIN = 200
-RIGHT_VIEWPORT_MARGIN = 200
+LEFT_VIEWPORT_MARGIN = 450
+RIGHT_VIEWPORT_MARGIN = 450
 BOTTOM_VIEWPORT_MARGIN = 150
 TOP_VIEWPORT_MARGIN = 100
 
@@ -50,6 +48,7 @@ def load_texture_pair(filename):
 
 class PlayerCharacter(arcade.Sprite):
     """ Player Sprite"""
+
     def __init__(self):
 
         # Set up parent class
@@ -103,7 +102,7 @@ class PlayerCharacter(arcade.Sprite):
         # self.set_hit_box([[-22, -64], [22, -64], [22, 28], [-22, 28]])
         self.set_hit_box(self.texture.hit_box_points)
 
-    def update_animation(self, delta_time: float = 1/60):
+    def update_animation(self, delta_time: float = 1 / 60):
 
         # Figure out if we need to flip face left or right
         if self.change_x < 0 and self.character_face_direction == RIGHT_FACING:
@@ -158,6 +157,7 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
         # Set the path to start with this program
+        self.tutorial_num = 0
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
 
@@ -195,6 +195,9 @@ class MyGame(arcade.Window):
 
         # Keep track of the score
         self.score = 0
+        # Keep track of tutorial text
+        self.tutorial_num = 0
+        self.tutorial = "Null"
 
         # Load sounds
         self.collect_coin_sound = arcade.load_sound("sounds/coin1.wav")
@@ -210,6 +213,7 @@ class MyGame(arcade.Window):
 
         # Keep track of the score
         self.score = 0
+
 
         # Create the Sprite lists
         self.player_list = arcade.SpriteList()
@@ -237,7 +241,7 @@ class MyGame(arcade.Window):
         dont_touch_layer_name = "Don't Touch"
 
         # Map name
-        map_name = f"maps/map_level_{level}.tmx"
+        map_name = f"maps/level_{level}.tmx"
 
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
@@ -255,7 +259,7 @@ class MyGame(arcade.Window):
         moving_platforms_list = arcade.tilemap.process_layer(my_map, moving_platforms_layer_name, TILE_SCALING)
         for sprite in moving_platforms_list:
             self.wall_list.append(sprite)
-        # -- Foreground
+            # -- Foreground
             # -- Foreground
             self.foreground_list = arcade.tilemap.process_layer(my_map,
                                                                 foreground_layer_name,
@@ -307,7 +311,23 @@ class MyGame(arcade.Window):
         # Draw our score on the screen, scrolling it with the viewport
         score_text = f"Score: {self.score}"
         arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
-                         arcade.csscolor.BLACK, 18)
+                         arcade.csscolor.WHITE, 18)
+        # Keep track of what tutorial text to display
+        if self.level == 1:
+            self.tutorial_num == 1
+        else:
+            self.tutorial_num == 0
+        # Keep track of tutorial text
+        if self.tutorial_num == 0:
+            self.tutorial = "Use A and D keys to move"
+        elif self.tutorial_num == 1:
+            self.tutorial = "Use W or Space to jump"
+        else:
+            self.tutorial = ""
+
+        # Draw tutorial text
+        tutorial_text = f"{self.tutorial}"
+        arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.LIME_GREEN, 18)
 
         # Draw hit boxes.
         # for wall in self.wall_list:
@@ -325,6 +345,8 @@ class MyGame(arcade.Window):
                 self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
             elif self.physics_engine.can_jump(y_distance=10) and not self.jump_needs_reset:
                 self.player_sprite.change_y = PLAYER_JUMP_SPEED
+                if self.tutorial_num == 1:
+                    self.tutorial_num += 1
                 self.jump_needs_reset = True
                 arcade.play_sound(self.jump_sound)
         elif self.down_pressed and not self.up_pressed:
@@ -341,8 +363,12 @@ class MyGame(arcade.Window):
         # Process left/right
         if self.right_pressed and not self.left_pressed:
             self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+            if self.tutorial_num == 0:
+                self.tutorial_num += 1
         elif self.left_pressed and not self.right_pressed:
             self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            if self.tutorial_num == 0:
+                self.tutorial_num += 1
         else:
             self.player_sprite.change_x = 0
 
