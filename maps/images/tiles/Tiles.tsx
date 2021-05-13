@@ -82,12 +82,6 @@
  <tile id="26">
   <image width="128" height="128" source="dirtRight.png"/>
  </tile>
- <tile id="27">
-  <image width="128" height="128" source="doorClosed_mid.png"/>
- </tile>
- <tile id="28">
-  <image width="128" height="128" source="doorClosed_top.png"/>
- </tile>
  <tile id="29">
   <image width="128" height="128" source="grass.png"/>
  </tile>
@@ -438,5 +432,11 @@
  </tile>
  <tile id="145">
   <image width="128" height="128" source="waterTop_low.png"/>
+ </tile>
+ <tile id="146">
+  <image width="128" height="128" source="doorClosed_mid.png"/>
+ </tile>
+ <tile id="149">
+  <image width="128" height="128" source="doorClosed_top.png"/>
  </tile>
 </tileset>

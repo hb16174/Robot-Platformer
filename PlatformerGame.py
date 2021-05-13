@@ -175,6 +175,7 @@ class MyGame(arcade.Window):
         self.foreground_list = None
         self.background_list = None
         self.dont_touch_list = None
+        self.do_touch_list = None
         self.ladder_list = None
         self.player_list = None
 
@@ -239,6 +240,7 @@ class MyGame(arcade.Window):
         coins_layer_name = 'Coins'
         # Name of the layer that has items we shouldn't touch
         dont_touch_layer_name = "Don't Touch"
+        do_touch_layer_name = "Do Touch"
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
@@ -281,6 +283,11 @@ class MyGame(arcade.Window):
                                                             dont_touch_layer_name,
                                                             TILE_SCALING,
                                                             use_spatial_hash=True)
+        # -- Don't Touch Layer
+        self.do_touch_list = arcade.tilemap.process_layer(my_map,
+                                                            do_touch_layer_name,
+                                                            TILE_SCALING,
+                                                            use_spatial_hash=True)
 
         # --- Other stuff
         # Set the background color
@@ -300,6 +307,7 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         # Draw our sprites
+        self.do_touch_list.draw()
         self.wall_list.draw()
         self.background_list.draw()
         self.ladder_list.draw()
@@ -321,7 +329,7 @@ class MyGame(arcade.Window):
         if self.tutorial_num == 0:
             self.tutorial = "Use A and D keys to move"
         elif self.tutorial_num == 1:
-            self.tutorial = "Use W or Space to jump"
+            self.tutorial = "Use W or Space keys to jump"
         else:
             self.tutorial = ""
 
