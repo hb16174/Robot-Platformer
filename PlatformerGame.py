@@ -493,14 +493,13 @@ class MyGame(arcade.Window):
             changed_viewport = True
             arcade.play_sound(self.game_over)
 
-        # See if the user got to the end of the level
-        if self.player_sprite.center_x >= self.end_of_map:
+        # Did the player touch something they should?
+        if arcade.check_for_collision_with_list(self.player_sprite,
+                                                self.do_touch_list):
             # Advance to the next level
             self.level += 1
-
             # Load the next level
             self.setup(self.level)
-
             # Set the camera to the start
             self.view_left = 0
             self.view_bottom = 0
