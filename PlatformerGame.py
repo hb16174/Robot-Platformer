@@ -1,6 +1,8 @@
 """
 Platformer Game
 """
+import math
+from typing import Optional
 import arcade
 import os
 
@@ -15,6 +17,24 @@ CHARACTER_SCALING = TILE_SCALING * 2
 COIN_SCALING = TILE_SCALING
 SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
+
+# Friction between objects
+PLAYER_FRICTION = 1.0
+WALL_FRICTION = 0.7
+DYNAMIC_ITEM_FRICTION = 0.6
+ITEM_GRAVITY = 1500
+
+# Damping - Amount of speed lost per second
+DEFAULT_DAMPING = 1.0
+PLAYER_DAMPING = 0.4
+
+# Friction between objects
+PLAYER_FRICTION = 1.0
+WALL_FRICTION = 0.7
+DYNAMIC_ITEM_FRICTION = 0.6
+
+# Mass (defaults to 1)
+PLAYER_MASS = 2.0
 
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 7
@@ -56,6 +76,9 @@ class PlayerCharacter(arcade.Sprite):
 
         # Default to face-right
         self.character_face_direction = RIGHT_FACING
+
+        # Physics engine
+        self.physics_engine = Optional[arcade.PymunkPhysicsEngine]
 
         # Used for flipping between image sequences
         self.cur_texture = 0
@@ -178,6 +201,7 @@ class MyGame(arcade.Window):
         self.do_touch_list = None
         self.ladder_list = None
         self.player_list = None
+        self.item_list: Optional[arcade.SpriteList] = None
 
         # Separate variable that holds the player sprite
         self.player_sprite = None
@@ -208,6 +232,16 @@ class MyGame(arcade.Window):
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
 
+        # physics damping
+        # Default value is 1.0 if not specified.
+        damping = DEFAULT_DAMPING
+        item_gravity = (0, -ITEM_GRAVITY)
+
+        # Create the physics engine
+        self.physics_engine = arcade.PymunkPhysicsEngine(damping=damping,
+                                                         gravity=item_gravity)
+
+
         # Used to keep track of our scrolling
         self.view_bottom = 0
         self.view_left = 0
@@ -215,13 +249,20 @@ class MyGame(arcade.Window):
         # Keep track of the score
         self.score = 0
 
-
         # Create the Sprite lists
         self.player_list = arcade.SpriteList()
         self.foreground_list = arcade.SpriteList()
         self.background_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        #self.item_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
+
+        # Create the items
+        self.physics_engine.add_sprite_list(self.item_list,
+                                            friction=DYNAMIC_ITEM_FRICTION,
+                                            collision_type="item")
+
+
 
         # Set up the player, specifically placing it at these coordinates.
         self.player_sprite = PlayerCharacter()
@@ -241,6 +282,7 @@ class MyGame(arcade.Window):
         # Name of the layer that has items we shouldn't touch
         dont_touch_layer_name = "Don't Touch"
         do_touch_layer_name = "Do Touch"
+        Dynamic_items_layer_name = "Dynamic Items"
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
@@ -255,6 +297,9 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.tilemap.process_layer(my_map,
                                                       platforms_layer_name,
                                                       TILE_SCALING,
+                                                      use_spatial_hash=True)
+        self.item_list = arcade.tilemap.process_layer(my_map,
+                                                      Dynamic_items_layer_name,
                                                       use_spatial_hash=True)
 
         # -- Moving Platforms
@@ -285,9 +330,9 @@ class MyGame(arcade.Window):
                                                             use_spatial_hash=True)
         # -- Don't Touch Layer
         self.do_touch_list = arcade.tilemap.process_layer(my_map,
-                                                            do_touch_layer_name,
-                                                            TILE_SCALING,
-                                                            use_spatial_hash=True)
+                                                          do_touch_layer_name,
+                                                          TILE_SCALING,
+                                                          use_spatial_hash=True)
 
         # --- Other stuff
         # Set the background color
@@ -300,6 +345,7 @@ class MyGame(arcade.Window):
                                                              gravity_constant=GRAVITY,
                                                              ladders=self.ladder_list)
 
+
     def on_draw(self):
         """ Render the screen. """
 
@@ -308,6 +354,7 @@ class MyGame(arcade.Window):
 
         # Draw our sprites
         self.do_touch_list.draw()
+        self.item_list.draw()
         self.wall_list.draw()
         self.background_list.draw()
         self.ladder_list.draw()
@@ -330,6 +377,8 @@ class MyGame(arcade.Window):
             self.tutorial = "Use A and D keys to move"
         elif self.tutorial_num == 1:
             self.tutorial = "Use W or Space keys to jump"
+        elif self.tutorial_num == 2:
+            self.tutorial = "Find the  the charger to finish the level"
         else:
             self.tutorial = ""
 
@@ -412,6 +461,7 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time):
         """ Movement and game logic """
 
+        self.physics_engine.step()
         # Move the player with the physics engine
         self.physics_engine.update()
 
