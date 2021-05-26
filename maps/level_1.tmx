@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#ffffff" nextlayerid="9" nextobjectid="1">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="9" nextobjectid="1">
  <tileset firstgid="1" source="images/tiles/Tiles.tsx"/>
  <layer id="2" name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -18,7 +18,7 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0TEKADAIA8D4/093d1VooXeQVUJMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOB9dbvA5/r+/rGrljO5S3IA0WgAJQ==
+   eJzt18ENQEAQhtEtTWkaQahEaQYXJ5zMJN5LvpvDxp/YaA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqGKIxhfFc33SEX9ljpZ2vPPurthjTT7qL8xnffY5ONmjFnvUcrk/lNx02UP57d8pe9TJHrXa9xge/jv0XXF/dBvSDWn4
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
@@ -26,14 +26,9 @@
    eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
   </data>
  </layer>
- <layer id="8" name="Dynamic Items" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJzt1SEOACAMA8DxBRT/fynB4LbghrhTlU0qGgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQGUkGQBe+Q+ore4CXGeL2V0CPrABrf8ARg==
-  </data>
- </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzjENAAAIA7D5fzGMjJHQKmgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMA30w4ctj9jAJQ=
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
   </data>
  </layer>
  <layer id="5" name="Foreground" width="100" height="100">
