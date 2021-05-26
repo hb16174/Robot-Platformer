@@ -159,6 +159,7 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
         # Set the path to start with this program
+        self.tutorial_num = 0
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
 
@@ -196,6 +197,9 @@ class MyGame(arcade.Window):
 
         # Keep track of the score
         self.score = 0
+        # Keep track of tutorial text
+        self.tutorial_num = 0
+        self.tutorial = "Null"
 
         # Load sounds
         self.collect_coin_sound = arcade.load_sound("sounds/coin1.wav")
@@ -309,6 +313,25 @@ class MyGame(arcade.Window):
         score_text = f"Score: {self.score}"
         arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
                          arcade.csscolor.BLACK, 18)
+        # Keep track of what tutorial text to display
+        if self.level == 1:
+            self.tutorial_num == 1
+        else:
+            self.tutorial_num == 0
+        # Keep track of tutorial text
+        if self.tutorial_num == 0:
+            self.tutorial = "Use A and D keys to move"
+        elif self.tutorial_num == 1:
+            self.tutorial = "Use W or Space keys to jump"
+        elif self.tutorial_num == 2:
+            self.tutorial = "Find the the x to finish the level"
+        else:
+            self.tutorial = ""
+
+        # Draw tutorial text
+        tutorial_text = f"{self.tutorial}"
+        arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
+        # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
 
         # Draw hit boxes.
         # for wall in self.wall_list:
@@ -326,6 +349,8 @@ class MyGame(arcade.Window):
                 self.player_sprite.change_y = PLAYER_MOVEMENT_SPEED
             elif self.physics_engine.can_jump(y_distance=10) and not self.jump_needs_reset:
                 self.player_sprite.change_y = PLAYER_JUMP_SPEED
+                if self.tutorial_num == 1:
+                    self.tutorial_num += 1
                 self.jump_needs_reset = True
                 arcade.play_sound(self.jump_sound)
         elif self.down_pressed and not self.up_pressed:
@@ -342,8 +367,12 @@ class MyGame(arcade.Window):
         # Process left/right
         if self.right_pressed and not self.left_pressed:
             self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+            if self.tutorial_num == 0:
+                self.tutorial_num += 1
         elif self.left_pressed and not self.right_pressed:
             self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+            if self.tutorial_num == 0:
+                self.tutorial_num += 1
         else:
             self.player_sprite.change_x = 0
 
