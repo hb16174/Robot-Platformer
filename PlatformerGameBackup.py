@@ -1,15 +1,15 @@
 """
 Platformer Game
+
+python -m arcade.examples.platform_tutorial.11_animate_character
 """
-import math
-from typing import Optional
 import arcade
 import os
 
 # Constants
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 650
-SCREEN_TITLE = "Robot Platformer"
+SCREEN_TITLE = "Platformer"
 
 # Constants used to scale our sprites from their original size
 TILE_SCALING = 0.5
@@ -18,24 +18,6 @@ COIN_SCALING = TILE_SCALING
 SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
 
-# Friction between objects
-PLAYER_FRICTION = 1.0
-WALL_FRICTION = 0.7
-DYNAMIC_ITEM_FRICTION = 0.6
-ITEM_GRAVITY = 1500
-
-# Damping - Amount of speed lost per second
-DEFAULT_DAMPING = 1.0
-PLAYER_DAMPING = 0.4
-
-# Friction between objects
-PLAYER_FRICTION = 1.0
-WALL_FRICTION = 0.7
-DYNAMIC_ITEM_FRICTION = 0.6
-
-# Mass (defaults to 1)
-PLAYER_MASS = 2.0
-
 # Movement speed of player, in pixels per frame
 PLAYER_MOVEMENT_SPEED = 7
 GRAVITY = 1.5
@@ -43,18 +25,20 @@ PLAYER_JUMP_SPEED = 30
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
-LEFT_VIEWPORT_MARGIN = 450
-RIGHT_VIEWPORT_MARGIN = 450
+LEFT_VIEWPORT_MARGIN = 200
+RIGHT_VIEWPORT_MARGIN = 200
 BOTTOM_VIEWPORT_MARGIN = 150
 TOP_VIEWPORT_MARGIN = 100
 
-PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 2
-PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 2
+PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 3
+PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 4
 
 # Constants used to track if the player is facing left or right
 RIGHT_FACING = 0
 LEFT_FACING = 1
 
+# LEVEL MAX
+LEVEL_MAX = 1
 
 def load_texture_pair(filename):
     """
@@ -64,6 +48,33 @@ def load_texture_pair(filename):
         arcade.load_texture(filename),
         arcade.load_texture(filename, flipped_horizontally=True)
     ]
+
+
+class InstructionView(arcade.View):
+    """ View to show instructions """
+
+    def on_show(self):
+        """ This is run once when we switch to this view """
+        arcade.set_background_color(arcade.csscolor.DARK_SLATE_BLUE)
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+        arcade.draw_text("Original Game Name", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                         arcade.color.WHITE, font_size=50, anchor_x="center")
+        arcade.draw_text("Click to Start", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 75,
+                         arcade.color.WHITE, font_size=20, anchor_x="center")
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        """ If the user presses the mouse button, start the game. """
+        if _y <= SCREEN_HEIGHT / 2 - 75:
+            game_view = GameView()
+            game_view.setup(1)
+            self.window.show_view(game_view)
 
 
 class PlayerCharacter(arcade.Sprite):
@@ -76,9 +87,6 @@ class PlayerCharacter(arcade.Sprite):
 
         # Default to face-right
         self.character_face_direction = RIGHT_FACING
-
-        # Physics engine
-        self.physics_engine = Optional[arcade.PymunkPhysicsEngine]
 
         # Used for flipping between image sequences
         self.cur_texture = 0
@@ -166,7 +174,7 @@ class PlayerCharacter(arcade.Sprite):
         self.texture = self.walk_textures[self.cur_texture][self.character_face_direction]
 
 
-class MyGame(arcade.Window):
+class GameView(arcade.View):
     """
     Main application class.
     """
@@ -177,7 +185,7 @@ class MyGame(arcade.Window):
         """
 
         # Call the parent class and set up the window
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        super().__init__()
 
         # Set the path to start with this program
         self.tutorial_num = 0
@@ -198,10 +206,8 @@ class MyGame(arcade.Window):
         self.foreground_list = None
         self.background_list = None
         self.dont_touch_list = None
-        self.do_touch_list = None
         self.ladder_list = None
         self.player_list = None
-        self.item_list: Optional[arcade.SpriteList] = None
 
         # Separate variable that holds the player sprite
         self.player_sprite = None
@@ -232,16 +238,6 @@ class MyGame(arcade.Window):
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
 
-        # physics damping
-        # Default value is 1.0 if not specified.
-        damping = DEFAULT_DAMPING
-        item_gravity = (0, -ITEM_GRAVITY)
-
-        # Create the physics engine
-        self.physics_engine = arcade.PymunkPhysicsEngine(damping=damping,
-                                                         gravity=item_gravity)
-
-
         # Used to keep track of our scrolling
         self.view_bottom = 0
         self.view_left = 0
@@ -254,15 +250,7 @@ class MyGame(arcade.Window):
         self.foreground_list = arcade.SpriteList()
         self.background_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
-        #self.item_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
-
-        # Create the items
-        # self.physics_engine.add_sprite_list(self.item_list,
-          #                                  friction=DYNAMIC_ITEM_FRICTION,
-           #                                 collision_type="item")
-
-
 
         # Set up the player, specifically placing it at these coordinates.
         self.player_sprite = PlayerCharacter()
@@ -281,11 +269,10 @@ class MyGame(arcade.Window):
         coins_layer_name = 'Coins'
         # Name of the layer that has items we shouldn't touch
         dont_touch_layer_name = "Don't Touch"
-        do_touch_layer_name = "Do Touch"
-        Dynamic_items_layer_name = "Dynamic Items"
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
+
 
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
@@ -297,9 +284,6 @@ class MyGame(arcade.Window):
         self.wall_list = arcade.tilemap.process_layer(my_map,
                                                       platforms_layer_name,
                                                       TILE_SCALING,
-                                                      use_spatial_hash=True)
-        self.item_list = arcade.tilemap.process_layer(my_map,
-                                                      Dynamic_items_layer_name,
                                                       use_spatial_hash=True)
 
         # -- Moving Platforms
@@ -328,11 +312,6 @@ class MyGame(arcade.Window):
                                                             dont_touch_layer_name,
                                                             TILE_SCALING,
                                                             use_spatial_hash=True)
-        # -- Don't Touch Layer
-        self.do_touch_list = arcade.tilemap.process_layer(my_map,
-                                                          do_touch_layer_name,
-                                                          TILE_SCALING,
-                                                          use_spatial_hash=True)
 
         # --- Other stuff
         # Set the background color
@@ -340,11 +319,10 @@ class MyGame(arcade.Window):
             arcade.set_background_color(my_map.background_color)
 
         # Create the 'physics engine'
-        # self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
-         #                                                    self.wall_list,
-           #                                                  gravity_constant=GRAVITY,
-               #                                              ladders=self.ladder_list)
-
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
+                                                             self.wall_list,
+                                                             gravity_constant=GRAVITY,
+                                                             ladders=self.ladder_list)
 
     def on_draw(self):
         """ Render the screen. """
@@ -353,8 +331,6 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         # Draw our sprites
-        self.do_touch_list.draw()
-        self.item_list.draw()
         self.wall_list.draw()
         self.background_list.draw()
         self.ladder_list.draw()
@@ -366,7 +342,7 @@ class MyGame(arcade.Window):
         # Draw our score on the screen, scrolling it with the viewport
         score_text = f"Score: {self.score}"
         arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
-                         arcade.csscolor.WHITE, 18)
+                         arcade.csscolor.BLACK, 18)
         # Keep track of what tutorial text to display
         if self.level == 1:
             self.tutorial_num == 1
@@ -378,13 +354,14 @@ class MyGame(arcade.Window):
         elif self.tutorial_num == 1:
             self.tutorial = "Use W or Space keys to jump"
         elif self.tutorial_num == 2:
-            self.tutorial = "Find the  the charger to finish the level"
+            self.tutorial = "Find the the x to finish the level"
         else:
             self.tutorial = ""
 
         # Draw tutorial text
         tutorial_text = f"{self.tutorial}"
-        arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.LIME_GREEN, 18)
+        arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
+        # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
 
         # Draw hit boxes.
         # for wall in self.wall_list:
@@ -461,22 +438,21 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time):
         """ Movement and game logic """
 
-#        self.physics_engine.step()
         # Move the player with the physics engine
-#        self.physics_engine.update()
+        self.physics_engine.update()
 
         # Update animations
-#        if self.physics_engine.can_jump():
- #           self.player_sprite.can_jump = False
-  #      else:
-   #         self.player_sprite.can_jump = True
-#
- #       if self.physics_engine.is_on_ladder() and not self.physics_engine.can_jump():
-  #          self.player_sprite.is_on_ladder = True
-   #         self.process_keychange()
-    #    else:
-     #       self.player_sprite.is_on_ladder = False
-      #      self.process_keychange()
+        if self.physics_engine.can_jump():
+            self.player_sprite.can_jump = False
+        else:
+            self.player_sprite.can_jump = True
+
+        if self.physics_engine.is_on_ladder() and not self.physics_engine.can_jump():
+            self.player_sprite.is_on_ladder = True
+            self.process_keychange()
+        else:
+            self.player_sprite.is_on_ladder = False
+            self.process_keychange()
 
         self.coin_list.update_animation(delta_time)
         self.background_list.update_animation(delta_time)
@@ -543,18 +519,18 @@ class MyGame(arcade.Window):
             changed_viewport = True
             arcade.play_sound(self.game_over)
 
-        # Did the player touch something they should?
-        if arcade.check_for_collision_with_list(self.player_sprite,
-                                                self.do_touch_list):
+        # See if the user got to the end of the level
+        if self.player_sprite.center_x >= self.end_of_map:
             # Advance to the next level
             self.level += 1
+
             # Load the next level
             self.setup(self.level)
+
             # Set the camera to the start
             self.view_left = 0
             self.view_bottom = 0
             changed_viewport = True
-
         # --- Manage Scrolling ---
 
         # Scroll left
@@ -596,8 +572,10 @@ class MyGame(arcade.Window):
 
 def main():
     """ Main method """
-    window = MyGame()
-    window.setup(window.level)
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = InstructionView()
+    window.show_view(start_view)
+    # window.setup(window.level)
     arcade.run()
 
 

@@ -19,7 +19,7 @@ SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
 
 # Movement speed of player, in pixels per frame
-PLAYER_MOVEMENT_SPEED = 7
+PLAYER_MOVEMENT_SPEED = 70
 GRAVITY = 1.5
 PLAYER_JUMP_SPEED = 30
 
@@ -37,6 +37,8 @@ PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 4
 RIGHT_FACING = 0
 LEFT_FACING = 1
 
+# LEVEL MAX
+LEVEL_MAX = 1
 
 def load_texture_pair(filename):
     """
@@ -46,6 +48,60 @@ def load_texture_pair(filename):
         arcade.load_texture(filename),
         arcade.load_texture(filename, flipped_horizontally=True)
     ]
+
+
+class InstructionView(arcade.View):
+    """ View to show instructions """
+
+    def __init__(self):
+        """ This is run once when we switch to this view """
+        super().__init__()
+        self.texture = arcade.load_texture("maps/images/views/gamestart.png")
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+
+        if key == arcade.key.TAB or key == arcade.key.ENTER:
+            game_view = GameView()
+            game_view.setup(1)
+            self.window.show_view(game_view)
+
+    # def on_mouse_press(self, _x, _y, _button, _modifiers):
+
+
+class GameOverView(arcade.View):
+    """ View to show when game is over """
+
+    def __init__(self):
+        """ This is run once when we switch to this view """
+        super().__init__()
+        self.texture = arcade.load_texture("maps/images/views/gameover.png")
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
+
+    def on_mouse_press(self, _x, _y, _button, _modifiers):
+        """ If the user presses the mouse button, re-start the game. """
+        game_view = GameView()
+        game_view.setup()
+        self.window.show_view(game_view)
 
 
 class PlayerCharacter(arcade.Sprite):
@@ -145,7 +201,7 @@ class PlayerCharacter(arcade.Sprite):
         self.texture = self.walk_textures[self.cur_texture][self.character_face_direction]
 
 
-class MyGame(arcade.Window):
+class GameView(arcade.View):
     """
     Main application class.
     """
@@ -156,7 +212,7 @@ class MyGame(arcade.Window):
         """
 
         # Call the parent class and set up the window
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        super().__init__()
 
         # Set the path to start with this program
         self.tutorial_num = 0
@@ -243,6 +299,7 @@ class MyGame(arcade.Window):
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
+
 
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
@@ -495,13 +552,16 @@ class MyGame(arcade.Window):
             self.level += 1
 
             # Load the next level
+            if self.level >= LEVEL_MAX:
+                view = GameOverView()
+                self.level = LEVEL_MAX
+                self.window.show_view(view)
             self.setup(self.level)
 
             # Set the camera to the start
             self.view_left = 0
             self.view_bottom = 0
             changed_viewport = True
-
         # --- Manage Scrolling ---
 
         # Scroll left
@@ -543,8 +603,10 @@ class MyGame(arcade.Window):
 
 def main():
     """ Main method """
-    window = MyGame()
-    window.setup(window.level)
+    window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+    start_view = InstructionView()
+    window.show_view(start_view)
+    # window.setup(window.level)
     arcade.run()
 
 
