@@ -40,6 +40,7 @@ LEFT_FACING = 1
 # LEVEL MAX
 LEVEL_MAX = 1
 
+
 def load_texture_pair(filename):
     """
     Load a texture pair, with the second being a mirror image.
@@ -100,7 +101,7 @@ class GameOverView(arcade.View):
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """ If the user presses the mouse button, re-start the game. """
         game_view = GameView()
-        game_view.setup()
+        game_view.setup(1)
         self.window.show_view(game_view)
 
 
@@ -125,14 +126,7 @@ class PlayerCharacter(arcade.Sprite):
         self.is_on_ladder = False
 
         # --- Load Textures ---
-
-        # Images from Kenney.nl's Asset Pack 3
-        # main_path = ":resources:images/animated_characters/female_adventurer/femaleAdventurer"
-        # main_path = ":resources:images/animated_characters/female_person/femalePerson"
-        main_path = "maps/images/player/Person"
-        # main_path = ":resources:images/animated_characters/male_adventurer/maleAdventurer"
-        # main_path = ":resources:images/animated_characters/zombie/zombie"
-        # main_path = ":resources:images/animated_characters/robot/robot"
+        main_path = "maps/images/person/Person"
 
         # Load textures for idle standing
         self.idle_texture_pair = load_texture_pair(f"{main_path}_idle.png")
@@ -158,7 +152,7 @@ class PlayerCharacter(arcade.Sprite):
         # Hit box will be set based on the first image used. If you want to specify
         # a different hit box, you can do it like the code below.
         # self.set_hit_box([[-22, -64], [22, -64], [22, 28], [-22, 28]])
-        self.set_hit_box(self.texture.hit_box_points)
+        # self.set_hit_box(self.texture.hit_box_points)
 
     def update_animation(self, delta_time: float = 1 / 60):
 
@@ -300,7 +294,6 @@ class GameView(arcade.View):
         # Map name
         map_name = f"maps/level_{level}.tmx"
 
-
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
 
@@ -370,11 +363,6 @@ class GameView(arcade.View):
         score_text = f"Score: {self.score}"
         arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
                          arcade.csscolor.BLACK, 18)
-        # Keep track of what tutorial text to display
-        if self.level == 1:
-            self.tutorial_num == 1
-        else:
-            self.tutorial_num == 0
         # Keep track of tutorial text
         if self.tutorial_num == 0:
             self.tutorial = "Use A and D keys to move"
