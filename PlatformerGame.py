@@ -367,9 +367,9 @@ class GameView(arcade.View):
         if self.tutorial_num == 0:
             self.tutorial = "Use A and D keys to move"
         elif self.tutorial_num == 1:
-            self.tutorial = "Use W or Space keys to jump"
+            self.tutorial = "Use W or Up key to jump"
         elif self.tutorial_num == 2:
-            self.tutorial = "Find the the x to finish the level"
+            self.tutorial = "Find the the computer to finish the level"
         else:
             self.tutorial = ""
 
