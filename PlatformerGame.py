@@ -5,6 +5,7 @@ python -m arcade.examples.platform_tutorial.11_animate_character
 """
 import arcade
 import os
+import timeit
 
 # Constants
 SCREEN_WIDTH = 1000
@@ -213,10 +214,21 @@ class GameView(arcade.View):
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
 
+        # --- Variables for our statistics
+        # Time for on_update
+        self.processing_time = 0
+        # Time for on_draw
+        self.draw_time = 0
+        # Variables used to calculate frames per second
+        self.frame_count = 0
+        self.fps_start_timer = None
+        self.fps = None
+
         # Track the current state of what key is pressed
         self.left_pressed = False
         self.right_pressed = False
         self.up_pressed = False
+        self.debug = False
         self.down_pressed = False
         self.jump_needs_reset = False
 
@@ -347,8 +359,42 @@ class GameView(arcade.View):
     def on_draw(self):
         """ Render the screen. """
 
+        # Start timing how long this takes
+        start_time = timeit.default_timer()
+        # --- Calculate FPS
+        fps_calculation_freq = 60
+        # Once every 60 frames, calculate our FPS
+        if self.frame_count % fps_calculation_freq == 0:
+            # Do we have a start time?
+            if self.fps_start_timer is not None:
+                # Calculate FPS
+                total_time = timeit.default_timer() - self.fps_start_timer
+                self.fps = fps_calculation_freq / total_time
+            # Reset the timer
+            self.fps_start_timer = timeit.default_timer()
+        # Add one to our frame count
+        self.frame_count += 1
+
         # Clear the screen to the background color
         arcade.start_render()
+
+        if self.debug:
+            # Display timings
+            output = f"Processing time: {self.processing_time:.3f}"
+            arcade.draw_text(output, 10 + self.view_left, 620 + self.view_bottom,
+                             arcade.csscolor.BLACK, 18)
+
+            output = f"Drawing time: {self.draw_time:.3f}"
+            arcade.draw_text(output, 10 + self.view_left, 600 + self.view_bottom,
+                            arcade.csscolor.BLACK, 18)
+
+            if self.fps is not None:
+                output = f"FPS: {self.fps:.0f}"
+                arcade.draw_text(output, 10 + self.view_left, 580 + self.view_bottom,
+                                 arcade.csscolor.BLACK, 18)
+
+        # Stop the draw timer, and calculate total on_draw time.
+        self.draw_time = timeit.default_timer() - start_time
 
         # Draw our sprites
         self.wall_list.draw()
@@ -360,7 +406,7 @@ class GameView(arcade.View):
         self.foreground_list.draw()
 
         # Draw our score on the screen, scrolling it with the viewport
-        score_text = f"Score: {self.score}"
+        score_text = f"Health: {self.score}"
         arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
                          arcade.csscolor.BLACK, 18)
         # Keep track of tutorial text
@@ -424,6 +470,10 @@ class GameView(arcade.View):
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
+        if key == arcade.key.F3 and not self.debug:
+            self.debug = True
+        elif key == arcade.key.F3 and self.debug:
+            self.debug = False
         if key == arcade.key.UP or key == arcade.key.W:
             self.up_pressed = True
         elif key == arcade.key.DOWN or key == arcade.key.S:
@@ -452,6 +502,9 @@ class GameView(arcade.View):
 
     def on_update(self, delta_time):
         """ Movement and game logic """
+
+        # Start timing how long this takes
+        start_time = timeit.default_timer()
 
         # Move the player with the physics engine
         self.physics_engine.update()
@@ -587,6 +640,9 @@ class GameView(arcade.View):
                                 SCREEN_WIDTH + self.view_left,
                                 self.view_bottom,
                                 SCREEN_HEIGHT + self.view_bottom)
+
+        # Stop the draw timer, and calculate total on_draw time.
+        self.processing_time = timeit.default_timer() - start_time
 
 
 def main():
