@@ -386,7 +386,7 @@ class GameView(arcade.View):
 
             output = f"Drawing time: {self.draw_time:.3f}"
             arcade.draw_text(output, 10 + self.view_left, 600 + self.view_bottom,
-                            arcade.csscolor.BLACK, 18)
+                             arcade.csscolor.BLACK, 18)
 
             if self.fps is not None:
                 output = f"FPS: {self.fps:.0f}"
