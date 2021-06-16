@@ -8,8 +8,8 @@ import os
 import timeit
 
 # Constants
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 650
+SCREEN_WIDTH = 1280  # 1000
+SCREEN_HEIGHT = 720  # 650
 SCREEN_TITLE = "Platformer"
 
 # Constants used to scale our sprites from their original size
@@ -20,7 +20,7 @@ SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
 
 # Movement speed of player, in pixels per frame
-PLAYER_MOVEMENT_SPEED = 70
+PLAYER_MOVEMENT_SPEED = 10
 GRAVITY = 1.5
 PLAYER_JUMP_SPEED = 30
 
@@ -276,7 +276,7 @@ class GameView(arcade.View):
         self.view_left = 0
 
         # Keep track of the score
-        self.score = 0
+        self.score = 3
 
         # Create the Sprite lists
         self.player_list = arcade.SpriteList()
@@ -378,21 +378,6 @@ class GameView(arcade.View):
         # Clear the screen to the background color
         arcade.start_render()
 
-        if self.debug:
-            # Display timings
-            output = f"Processing time: {self.processing_time:.3f}"
-            arcade.draw_text(output, 10 + self.view_left, 620 + self.view_bottom,
-                             arcade.csscolor.BLACK, 18)
-
-            output = f"Drawing time: {self.draw_time:.3f}"
-            arcade.draw_text(output, 10 + self.view_left, 600 + self.view_bottom,
-                             arcade.csscolor.BLACK, 18)
-
-            if self.fps is not None:
-                output = f"FPS: {self.fps:.0f}"
-                arcade.draw_text(output, 10 + self.view_left, 580 + self.view_bottom,
-                                 arcade.csscolor.BLACK, 18)
-
         # Stop the draw timer, and calculate total on_draw time.
         self.draw_time = timeit.default_timer() - start_time
 
@@ -405,10 +390,16 @@ class GameView(arcade.View):
         self.dont_touch_list.draw()
         self.foreground_list.draw()
 
-        # Draw our score on the screen, scrolling it with the viewport
-        score_text = f"Health: {self.score}"
-        arcade.draw_text(score_text, 10 + self.view_left, 10 + self.view_bottom,
-                         arcade.csscolor.BLACK, 18)
+        # Change the health texture to math the player's health
+        if self.score == 3:
+            self.health_texture = arcade.load_texture("maps/images/person/health_3.png")
+        elif self.score == 2:
+            self.health_texture = arcade.load_texture("maps/images/person/health_2.png")
+
+        # Draw our health on the screen, scrolling it with the character
+        self.health_texture.draw_sized(self.player_sprite.center_x + 1.5, self.player_sprite.center_y + 16,
+                                       25, 10)
+
         # Keep track of tutorial text
         if self.tutorial_num == 0:
             self.tutorial = "Use A and D keys to move"
@@ -429,6 +420,26 @@ class GameView(arcade.View):
         #     wall.draw_hit_box(arcade.color.BLACK, 3)
         #
         # self.player_sprite.draw_hit_box(arcade.color.RED, 3)
+        if self.debug:
+            # Draw hit boxes.
+            for wall in self.wall_list:
+                wall.draw_hit_box(arcade.color.BLACK, 3)
+
+            self.player_sprite.draw_hit_box(arcade.color.RED, 3)
+
+            # Display timings
+            output = f"Processing time: {self.processing_time:.3f}"
+            arcade.draw_text(output, 10 + self.view_left, 620 + self.view_bottom,
+                             arcade.csscolor.BLACK, 18)
+
+            output = f"Drawing time: {self.draw_time:.3f}"
+            arcade.draw_text(output, 10 + self.view_left, 600 + self.view_bottom,
+                             arcade.csscolor.BLACK, 18)
+
+            if self.fps is not None:
+                output = f"FPS: {self.fps:.0f}"
+                arcade.draw_text(output, 10 + self.view_left, 580 + self.view_bottom,
+                                 arcade.csscolor.BLACK, 18)
 
     def process_keychange(self):
         """
