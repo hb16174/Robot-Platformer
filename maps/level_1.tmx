@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="9" nextobjectid="1">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="9" nextobjectid="1">
  <tileset firstgid="1" source="images/tiles/Tiles.tsx"/>
  <layer id="2" name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
@@ -13,12 +13,12 @@
  </layer>
  <layer id="6" name="Don't Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztzrENAAAEADD/v8GhZpNRIu0FjQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBdXQcY8joAAI81Ev0BSA==
   </data>
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt18ENQEAQhtEtTWkaQahEaQYXJ5zMJN5LvpvDxp/YaA0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqGKIxhfFc33SEX9ljpZ2vPPurthjTT7qL8xnffY5ONmjFnvUcrk/lNx02UP57d8pe9TJHrXa9xge/jv0XXF/dBvSDWn4
+   eJzt18ENQEAURdEpTWkaQahEaT42VtgwX5yT3J3ExEuIUgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACALLqov1Fc11Y64q+M0VS2Z96cFXvMlY/6C+NeW/sc7OyRiz1yOXw/Hq28cI+vNxz2UP3W95Q98mSPXK17dBf/HXqv+H40Cz+haVo=
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">

@@ -1,7 +1,5 @@
 """
 Platformer Game
-
-python -m arcade.examples.platform_tutorial.11_animate_character
 """
 import arcade
 import os
@@ -10,7 +8,7 @@ import timeit
 # Constants
 SCREEN_WIDTH = 1280  # 1000
 SCREEN_HEIGHT = 720  # 650
-SCREEN_TITLE = "Platformer"
+SCREEN_TITLE = "Robot Platformer"
 
 # Constants used to scale our sprites from their original size
 TILE_SCALING = 0.5
@@ -63,6 +61,7 @@ class InstructionView(arcade.View):
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
         arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+        self.selected = 1
 
     def on_draw(self):
         """ Draw this view """
@@ -70,13 +69,43 @@ class InstructionView(arcade.View):
         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                                 SCREEN_WIDTH, SCREEN_HEIGHT)
 
+        if self.selected == 1:
+            arcade.draw_text("Start", 50, 400, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text("Start", 50, 400, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 2:
+            arcade.draw_text(f"2 :{self.selected}", 50, 300, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text(f"2 :{self.selected}", 50, 300, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 3:
+            arcade.draw_text(f"3 :{self.selected}", 50, 200, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text(f"3 :{self.selected}", 50, 200, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 4:
+            arcade.draw_text(f"Quit{self.selected}", 50, 100, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text(f"Quit{self.selected}", 50, 100, arcade.csscolor.WHITE, 50)
+
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
-        if key == arcade.key.TAB or key == arcade.key.ENTER:
-            game_view = GameView()
-            game_view.setup(1)
-            self.window.show_view(game_view)
+        if key == arcade.key.UP or arcade.key.W:
+            self.selected -= 1
+            if self.selected <= 0:
+                self.selected = 4
+        if key == arcade.key.DOWN:
+            self.selected += 1
+
+        elif key == arcade.key.ENTER:
+            if self.selected == 1:
+                game_view = GameView()
+                game_view.setup(1)
+                self.window.show_view(game_view)
+            elif self.selected == 4:
+                arcade.close_window()
 
     # def on_mouse_press(self, _x, _y, _button, _modifiers):
 
@@ -348,7 +377,7 @@ class GameView(arcade.View):
         # --- Other stuff
         # Set the background color
         if my_map.background_color:
-            arcade.set_background_color(my_map.background_color)
+            arcade.set_background_color(arcade.csscolor.BLACK)  # my_map.background_color
 
         # Create the 'physics engine'
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
@@ -395,6 +424,8 @@ class GameView(arcade.View):
             self.health_texture = arcade.load_texture("maps/images/person/health_3.png")
         elif self.score == 2:
             self.health_texture = arcade.load_texture("maps/images/person/health_2.png")
+        else:
+            self.health_texture = arcade.load_texture("maps/images/person/health_1.png")
 
         # Draw our health on the screen, scrolling it with the character
         self.health_texture.draw_sized(self.player_sprite.center_x + 1.5, self.player_sprite.center_y + 16,
@@ -414,6 +445,8 @@ class GameView(arcade.View):
         tutorial_text = f"{self.tutorial}"
         arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
         # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
+        if self.level == 1:
+            arcade.draw_text("Don't Touch Marked Objects", 1200, 235, arcade.csscolor.RED, 25)
 
         # Draw hit boxes.
         # for wall in self.wall_list:
@@ -597,6 +630,10 @@ class GameView(arcade.View):
             self.view_bottom = 0
             changed_viewport = True
             arcade.play_sound(self.game_over)
+            self.score -= 1
+            if self.score <= 0:
+                view = GameOverView()
+                self.window.show_view(view)
 
         # See if the user got to the end of the level
         if self.player_sprite.center_x >= self.end_of_map:

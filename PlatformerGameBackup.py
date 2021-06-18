@@ -40,6 +40,7 @@ LEFT_FACING = 1
 # LEVEL MAX
 LEVEL_MAX = 1
 
+
 def load_texture_pair(filename):
     """
     Load a texture pair, with the second being a mirror image.
@@ -272,7 +273,6 @@ class GameView(arcade.View):
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
-
 
         # Read in the tiled map
         my_map = arcade.tilemap.read_tmx(map_name)
