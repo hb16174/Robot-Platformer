@@ -37,7 +37,7 @@ RIGHT_FACING = 0
 LEFT_FACING = 1
 
 # LEVEL MAX
-LEVEL_MAX = 1
+LEVEL_MAX = 2
 
 
 def load_texture_pair(filename):
@@ -69,45 +69,43 @@ class InstructionView(arcade.View):
         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                                 SCREEN_WIDTH, SCREEN_HEIGHT)
 
+        arcade.draw_text("Controls:", 850, 440, arcade.csscolor.WHITE, 30)
+        arcade.draw_text("Up / Down Keys", 860, 400, arcade.csscolor.WHITE, 25)
+        arcade.draw_text("Enter", 860, 360, arcade.csscolor.WHITE, 25)
+
         if self.selected == 1:
             arcade.draw_text("Start", 50, 400, arcade.csscolor.YELLOW, 50)
         else:
             arcade.draw_text("Start", 50, 400, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            arcade.draw_text(f"2 :{self.selected}", 50, 300, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text("Credits", 50, 200, arcade.csscolor.YELLOW, 50)
         else:
-            arcade.draw_text(f"2 :{self.selected}", 50, 300, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Credits", 50, 200, arcade.csscolor.WHITE, 50)
 
         if self.selected == 3:
-            arcade.draw_text(f"3 :{self.selected}", 50, 200, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text("Quit", 50, 100, arcade.csscolor.YELLOW, 50)
         else:
-            arcade.draw_text(f"3 :{self.selected}", 50, 200, arcade.csscolor.WHITE, 50)
-
-        if self.selected == 4:
-            arcade.draw_text(f"Quit{self.selected}", 50, 100, arcade.csscolor.YELLOW, 50)
-        else:
-            arcade.draw_text(f"Quit{self.selected}", 50, 100, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Quit", 50, 100, arcade.csscolor.WHITE, 50)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
 
-        if key == arcade.key.UP or arcade.key.W:
-            self.selected -= 1
-            if self.selected <= 0:
-                self.selected = 4
-        if key == arcade.key.DOWN:
-            self.selected += 1
-
-        elif key == arcade.key.ENTER:
+        if key == arcade.key.ENTER:
             if self.selected == 1:
                 game_view = GameView()
                 game_view.setup(1)
                 self.window.show_view(game_view)
-            elif self.selected == 4:
+            elif self.selected == 3:
                 arcade.close_window()
-
-    # def on_mouse_press(self, _x, _y, _button, _modifiers):
+        if key == arcade.key.DOWN:
+            self.selected += 1
+            if self.selected > 3:
+                self.selected = 1
+        if key == arcade.key.UP:
+            self.selected -= 1
+            if self.selected < 1:
+                self.selected = 3
 
 
 class GameOverView(arcade.View):
@@ -121,12 +119,45 @@ class GameOverView(arcade.View):
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
         arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+        self.selected = 1
 
     def on_draw(self):
         """ Draw this view """
         arcade.start_render()
         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                                 SCREEN_WIDTH, SCREEN_HEIGHT)
+
+        arcade.draw_text("Controls:", 850, 400, arcade.csscolor.WHITE, 30)
+        arcade.draw_text("Up / Down Keys", 860, 360, arcade.csscolor.WHITE, 25)
+        arcade.draw_text("Enter", 860, 320, arcade.csscolor.WHITE, 25)
+
+        if self.selected == 1:
+            arcade.draw_text("Menu", 500, 300, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text("Menu", 500, 300, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 2:
+            arcade.draw_text("Quit", 500, 250, arcade.csscolor.YELLOW, 50)
+        else:
+            arcade.draw_text("Quit", 500, 250, arcade.csscolor.WHITE, 50)
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+
+        if key == arcade.key.ENTER:
+            if self.selected == 1:
+                game_view = InstructionView()
+                self.window.show_view(game_view)
+            elif self.selected == 2:
+                arcade.close_window()
+        if key == arcade.key.DOWN:
+            self.selected += 1
+            if self.selected > 2:
+                self.selected = 1
+        if key == arcade.key.UP:
+            self.selected -= 1
+            if self.selected < 1:
+                self.selected = 2
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """ If the user presses the mouse button, re-start the game. """
@@ -268,6 +299,7 @@ class GameView(arcade.View):
         self.foreground_list = None
         self.background_list = None
         self.dont_touch_list = None
+        self.do_touch_list = None
         self.ladder_list = None
         self.player_list = None
 
@@ -331,6 +363,7 @@ class GameView(arcade.View):
         coins_layer_name = 'Coins'
         # Name of the layer that has items we shouldn't touch
         dont_touch_layer_name = "Don't Touch"
+        do_touch_layer_name = "Do Touch"
 
         # Map name
         map_name = f"maps/level_{level}.tmx"
@@ -373,6 +406,12 @@ class GameView(arcade.View):
                                                             dont_touch_layer_name,
                                                             TILE_SCALING,
                                                             use_spatial_hash=True)
+
+        # -- Do Touch Layer
+        self.do_touch_list = arcade.tilemap.process_layer(my_map,
+                                                          do_touch_layer_name,
+                                                          TILE_SCALING,
+                                                          use_spatial_hash=True)
 
         # --- Other stuff
         # Set the background color
@@ -417,6 +456,7 @@ class GameView(arcade.View):
         self.coin_list.draw()
         self.player_list.draw()
         self.dont_touch_list.draw()
+        self.do_touch_list.draw()
         self.foreground_list.draw()
 
         # Change the health texture to math the player's health
@@ -610,7 +650,12 @@ class GameView(arcade.View):
         if self.player_sprite.center_y < -100:
             self.player_sprite.center_x = PLAYER_START_X
             self.player_sprite.center_y = PLAYER_START_Y
+            self.score -= 1
+            if self.score <= 0:
+                view = GameOverView()
+                self.window.show_view(view)
 
+            # Set the camera to the start
             # Set the camera to the start
             self.view_left = 0
             self.view_bottom = 0
@@ -636,12 +681,13 @@ class GameView(arcade.View):
                 self.window.show_view(view)
 
         # See if the user got to the end of the level
-        if self.player_sprite.center_x >= self.end_of_map:
+        if arcade.check_for_collision_with_list(self.player_sprite,
+                                                self.do_touch_list):
             # Advance to the next level
             self.level += 1
 
             # Load the next level
-            if self.level >= LEVEL_MAX:
+            if self.level > LEVEL_MAX:
                 view = GameOverView()
                 self.level = LEVEL_MAX
                 self.window.show_view(view)
