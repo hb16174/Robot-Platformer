@@ -24,8 +24,8 @@ PLAYER_JUMP_SPEED = 30
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
-LEFT_VIEWPORT_MARGIN = 200
-RIGHT_VIEWPORT_MARGIN = 200
+LEFT_VIEWPORT_MARGIN = 450
+RIGHT_VIEWPORT_MARGIN = 450
 BOTTOM_VIEWPORT_MARGIN = 150
 TOP_VIEWPORT_MARGIN = 100
 
@@ -57,6 +57,8 @@ class InstructionView(arcade.View):
         """ This is run once when we switch to this view """
         super().__init__()
         self.texture = arcade.load_texture("maps/images/views/gamestart.png")
+        self.char = arcade.load_texture("maps/images/person/Person_idle.png")
+        self.health = arcade.load_texture("maps/images/person/health_3.png")
 
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
@@ -68,25 +70,27 @@ class InstructionView(arcade.View):
         arcade.start_render()
         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                                 SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.char.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3.29,
+                             96, 128)
 
         arcade.draw_text("Controls:", 850, 440, arcade.csscolor.WHITE, 30)
         arcade.draw_text("Up / Down Keys", 860, 400, arcade.csscolor.WHITE, 25)
         arcade.draw_text("Enter", 860, 360, arcade.csscolor.WHITE, 25)
 
         if self.selected == 1:
-            arcade.draw_text("Start", 50, 400, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text(" Start ", 10, 385, arcade.csscolor.WHITE,75)
         else:
-            arcade.draw_text("Start", 50, 400, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Start", 30, 400, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            arcade.draw_text("Credits", 50, 200, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text(" Credits ", 10, 185, arcade.csscolor.WHITE, 75)
         else:
-            arcade.draw_text("Credits", 50, 200, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Credits", 30, 200, arcade.csscolor.WHITE, 50)
 
         if self.selected == 3:
-            arcade.draw_text("Quit", 50, 100, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text(" Quit ", 30, 35, arcade.csscolor.BLACK, 75)
         else:
-            arcade.draw_text("Quit", 50, 100, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Quit", 30, 50, arcade.csscolor.BLACK, 50)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -124,6 +128,9 @@ class GameOverView(arcade.View):
     def on_draw(self):
         """ Draw this view """
         arcade.start_render()
+
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+
         self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
                                 SCREEN_WIDTH, SCREEN_HEIGHT)
 
@@ -684,6 +691,7 @@ class GameView(arcade.View):
         if arcade.check_for_collision_with_list(self.player_sprite,
                                                 self.do_touch_list):
             # Advance to the next level
+            self.tutorial_num += 1
             self.level += 1
 
             # Load the next level
