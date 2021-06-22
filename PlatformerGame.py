@@ -29,7 +29,7 @@ RIGHT_VIEWPORT_MARGIN = 450
 BOTTOM_VIEWPORT_MARGIN = 150
 TOP_VIEWPORT_MARGIN = 100
 
-PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 3
+PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 10  # 3
 PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 4
 
 # Constants used to track if the player is facing left or right
@@ -139,14 +139,14 @@ class GameOverView(arcade.View):
         arcade.draw_text("Enter", 860, 320, arcade.csscolor.WHITE, 25)
 
         if self.selected == 1:
-            arcade.draw_text("Menu", 500, 300, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text("Menu", 485, 285, arcade.csscolor.WHITE, 75)
         else:
             arcade.draw_text("Menu", 500, 300, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            arcade.draw_text("Quit", 500, 250, arcade.csscolor.YELLOW, 50)
+            arcade.draw_text("Quit", 505, 215, arcade.csscolor.WHITE, 75)
         else:
-            arcade.draw_text("Quit", 500, 250, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Quit", 520, 230, arcade.csscolor.WHITE, 50)
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed. """
@@ -691,7 +691,8 @@ class GameView(arcade.View):
         if arcade.check_for_collision_with_list(self.player_sprite,
                                                 self.do_touch_list):
             # Advance to the next level
-            self.tutorial_num += 1
+            if self.level == 1:
+                self.tutorial_num += 1
             self.level += 1
 
             # Load the next level
