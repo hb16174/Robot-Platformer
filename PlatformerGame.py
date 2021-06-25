@@ -4,8 +4,11 @@ Platformer Game
 import arcade
 import os
 import timeit
+import arcade.gui
 
 # Constants
+import arcade as arcade
+
 SCREEN_WIDTH = 1280  # 1000
 SCREEN_HEIGHT = 720  # 650
 SCREEN_TITLE = "Robot Platformer"
@@ -39,6 +42,9 @@ LEFT_FACING = 1
 # LEVEL MAX
 LEVEL_MAX = 2
 
+# Button / Trigger types
+trigger_type = {}  # f"{arcade.load_texture('maps/images/tiles/BlueButton.png')}"}
+
 
 def load_texture_pair(filename):
     """
@@ -56,6 +62,7 @@ class InstructionView(arcade.View):
     def __init__(self):
         """ This is run once when we switch to this view """
         super().__init__()
+
         self.texture = arcade.load_texture("maps/images/views/gamestart.png")
         self.char = arcade.load_texture("maps/images/person/Person_idle.png")
         self.health = arcade.load_texture("maps/images/person/health_3.png")
@@ -78,7 +85,7 @@ class InstructionView(arcade.View):
         arcade.draw_text("Enter", 860, 360, arcade.csscolor.WHITE, 25)
 
         if self.selected == 1:
-            arcade.draw_text(" Start ", 10, 385, arcade.csscolor.WHITE,75)
+            arcade.draw_text(" Start ", 10, 385, arcade.csscolor.WHITE, 75)
         else:
             arcade.draw_text("Start", 30, 400, arcade.csscolor.WHITE, 50)
 
@@ -110,6 +117,24 @@ class InstructionView(arcade.View):
             self.selected -= 1
             if self.selected < 1:
                 self.selected = 3
+
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
+        if 385 <= y <= 385 + 75 and 10 <= x <= 200:
+            self.selected = 1
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 200:
+            self.selected = 2
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            self.selected = 3
+
+    def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
+        if 385 <= y <= 385 + 75 and 10 <= x <= 200:
+            game_view = GameView()
+            game_view.setup(1)
+            self.window.show_view(game_view)
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 200:
+            self.selected = 2
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            arcade.close_window()
 
 
 class GameOverView(arcade.View):
@@ -166,11 +191,18 @@ class GameOverView(arcade.View):
             if self.selected < 1:
                 self.selected = 2
 
-    def on_mouse_press(self, _x, _y, _button, _modifiers):
-        """ If the user presses the mouse button, re-start the game. """
-        game_view = GameView()
-        game_view.setup(1)
-        self.window.show_view(game_view)
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
+        if 285 <= y <= 285 + 75 and 450 <= x <= 450+200:
+            self.selected = 1
+        elif 230 <= y <= 230 + 75 and 500 <= x <= 500+200:
+            self.selected = 2
+
+    def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
+        if 285 <= y <= 285 + 75 and 450 <= x <= 450+200:
+            game_view = InstructionView()
+            self.window.show_view(game_view)
+        elif 230 <= y <= 230 + 75 and 500 <= x <= 500 + 200:
+            arcade.close_window()
 
 
 class PlayerCharacter(arcade.Sprite):
@@ -641,6 +673,8 @@ class GameView(arcade.View):
 
             # Figure out how many points this coin is worth
             if 'Points' not in coin.properties:
+                if coin in trigger_type:
+                    print("works")
                 print("Warning, collected a coin without a Points property.")
             else:
                 points = int(coin.properties['Points'])

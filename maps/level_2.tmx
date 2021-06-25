@@ -11,19 +11,19 @@
    eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
   </data>
  </layer>
- <layer id="6" name="Don't Touch" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJztzrENAAAEADD/v8GhZpNRIu0FjQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIBdXQcY8joAAI81Ev0BSA==
-  </data>
- </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt1bsNgDAMRVGPltFYhCAyKU6XAfgY6Rzp1i5e4QgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgLmc2sv5w8cKNv3cse+j7covNHnWyR63mHntE6ypR/o92Acs+Uzw=
+   eJzt1dEJhDAURNFXmqXZyCpa6RoLUJHgzuI5MN8GLjFVAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABw33qwpWr83cneSY8semTRI4seWfTIokcWPbLokUWPLHpkOerRNnXaFb2+9a+ba78Dp03smbX/kR450yNrrcenapgsYtv7MXwBxo6Lig==
+  </data>
+ </layer>
+ <layer id="6" name="Don't Touch" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztybENADAIwDD+fwMO7QlFwGhLmRIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf7X83MpGAMDMAx3yBwQ=
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztzjEBAAAIA6D1L2JNE+zVBxKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQDffAQCAYwt7mgCo
   </data>
  </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
