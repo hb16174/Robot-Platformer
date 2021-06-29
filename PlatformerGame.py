@@ -7,7 +7,6 @@ import timeit
 import arcade.gui
 
 # Constants
-import arcade as arcade
 
 SCREEN_WIDTH = 1280  # 1000
 SCREEN_HEIGHT = 720  # 650
@@ -309,6 +308,7 @@ class GameView(arcade.View):
         super().__init__()
 
         # Set the path to start with this program
+        self.health_texture = arcade.load_texture("maps/images/person/health_1.png")
         self.tutorial_num = 0
         file_path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(file_path)
@@ -396,6 +396,7 @@ class GameView(arcade.View):
 
         # Name of the layer in the file that has our platforms/walls
         platforms_layer_name = 'Platforms'
+        blue_button_layer_name = "Blue Button"
         moving_platforms_layer_name = 'Moving Platforms'
         foreground_layer_name = "Foreground"
         # Name of the layer that has items for pick-up
@@ -503,8 +504,10 @@ class GameView(arcade.View):
             self.health_texture = arcade.load_texture("maps/images/person/health_3.png")
         elif self.score == 2:
             self.health_texture = arcade.load_texture("maps/images/person/health_2.png")
-        else:
+        elif self.score == 1:
             self.health_texture = arcade.load_texture("maps/images/person/health_1.png")
+        else:
+            pass
 
         # Draw our health on the screen, scrolling it with the character
         self.health_texture.draw_sized(self.player_sprite.center_x + 1.5, self.player_sprite.center_y + 16,
