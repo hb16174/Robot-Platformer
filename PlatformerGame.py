@@ -396,7 +396,6 @@ class GameView(arcade.View):
 
         # Name of the layer in the file that has our platforms/walls
         platforms_layer_name = 'Platforms'
-        blue_button_layer_name = "Blue Button"
         moving_platforms_layer_name = 'Moving Platforms'
         foreground_layer_name = "Foreground"
         # Name of the layer that has items for pick-up
@@ -675,13 +674,15 @@ class GameView(arcade.View):
         for coin in coin_hit_list:
 
             # Figure out how many points this coin is worth
-            if 'Points' not in coin.properties:
-                if coin in trigger_type:
-                    print("works")
-                print("Warning, collected a coin without a Points property.")
+            if 'Type' not in coin.properties:
+                print("Warning, collected an item without a Type property.")
             else:
-                points = int(coin.properties['Points'])
-                self.score += points
+                trigger = int(coin.properties['Type'])
+                print("Triggered:", trigger)
+                if trigger == 1:
+                    for wall in self.wall_list:
+                        if "Type" not in wall.properties:
+                            pass
 
             # Remove the coin
             coin.remove_from_sprite_lists()
