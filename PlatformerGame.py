@@ -528,6 +528,8 @@ class GameView(arcade.View):
         # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
         if self.level == 1:
             arcade.draw_text("Don't Touch Marked Objects", 1200, 235, arcade.csscolor.RED, 25)
+        elif self.level == 2:
+            arcade.draw_text("Coloured Buttons react with same coloured objects", 1200, 235, arcade.csscolor.BLUE, 25)
 
         # Draw hit boxes.
         # for wall in self.wall_list:
@@ -679,10 +681,12 @@ class GameView(arcade.View):
             else:
                 trigger = int(coin.properties['Type'])
                 print("Triggered:", trigger)
-                if trigger == 1:
-                    for wall in self.wall_list:
-                        if "Type" not in wall.properties:
-                            pass
+                for wall in self.wall_list:
+                    if "Type" not in wall.properties:
+                        pass
+                    else:
+                        if int(coin.properties['Type']) == trigger:
+                            wall.remove_from_sprite_lists()
 
             # Remove the coin
             coin.remove_from_sprite_lists()

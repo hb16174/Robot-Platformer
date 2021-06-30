@@ -18,7 +18,7 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2FsOgjAQBdBZmktzI2h0JS5NTHxhTBiSYls5J5lfKPe2gRABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA0I5zwWFeybz1sdwv89fHVM3s/7GP2vnpY6p2frc5ROwyo4/18z6Ok13rKXGv3q2d/5K85+hj+d4vmf8nfdTL/ht9vGbMYl9piU9b6GPuGR9nYYi4VFvk3db7aOFMvNOHPn5NH21JvD+KTBS4Rua7o3eZPdfT9E4fbdFHW4bkv9UWZgt9XAHnQc3x
+   eJzt2OsJgzAYBdCM1tFcxEo7SUerBfuwWExATdKcA98fEYz3RhRDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjHdcNh3ZZ56yPdkfnrYy5n9v/YR+789DGXO7/HnEM4xYw+9s97GCd2rZeIa9Vu7/xT8l6jj/S9v2X+3/SRL/sl+njPmEWXaYkvLfSxdo/PZ6EP4ZZtkZPW+yjhmfikD30crcQ+xu+Eblg43nof0/tjkwkJ5/66dsx3R+1i9lxNUzt9lEUfZekj/62WMC30cQdxbc+3
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
@@ -28,7 +28,7 @@
  </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzrEJACAMAMHsv4MIgntqEQQ7uyDcwfcfAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L9ZPcCl7Xr1BMfIAIA3C0ndAyY=
+   eJztzgENAAAIA6D372FPY3w6SEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABw37QDAAC8sUn1AKY=
   </data>
  </layer>
  <layer id="5" name="Foreground" width="100" height="100">
