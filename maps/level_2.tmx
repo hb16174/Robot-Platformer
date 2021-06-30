@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="images/tiles/Tiles.tsx"/>
  <layer id="2" name="Background" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztzrENADAIwDD+/4HyKjzQmQFbyp4IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAuyul9qsUvAAAAAACAbQ0x1wTx
   </data>
  </layer>
  <layer id="3" name="Ladders" width="100" height="100">
@@ -13,12 +13,12 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2EEKwjAQBdA5Wo7mRVR0VW/Ro2lF6C5UGeykvAd/1ZJZfJKSRgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwO/undwiTr3n8t/oQ6SfS8ScnPZJ9rqHSK+L5byKRNOX7z8yhw9CH7UU72POnD+C4n2kzh9B8T5a5vwRFO8jdf4IivfRMuePYMP9IyWRuNZRc433Htj9zinreaSPOtFHrSx9nNf/SbJzXt+P9gRuz8Zy
+   eJzt2lFKw0AYhdF/aVmaG4miT7qLLM2EUKxSYhsH5iaeA99LkcbOLVZbqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALa9SZIkSTt6rhp61/sMUnqteqoA8/fR/SwSskdW9sjKHlnZIyt7ZGWPrOyRlT2yskdW9sjKHlnZIyt7ZGWPr/a+79/q84Llfsaq6a9nOa739a26cdtWLZ5XvfdM2aH34zlqZ99h/p6mxl0+v2x9v9OZd1hq/Tr4/uDXf7S8+C+Sd/hPexxhh6A9ppbXv7j+Xan3GR9sjybXvz7/Re9zPfAew57rnOX8A/e46/o//1brfW4n3mO4dftZn//39Mj7AVtVw/tKf6x7e6mM97i0tvw8skdO9shq2WMM+D98rc2vH8Mnu72CCQ==
   </data>
  </layer>
  <layer id="6" name="Don't Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztyrENAAAEADD/v8GhThCDSTs3AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGZ1/NnJ4w8AnzVMWwKP
+   eJzt1rEJACAMRcHsv4YOam+lAfkId3WK8EiRKgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIGGkFwAAgI0fNUt/fjAfzbv/nttuOgPAuQWwYwUb
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
@@ -28,7 +28,7 @@
  </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztxSEBAAAIA7D370FP/AuA2MwSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbUwMAAAAAAMAHCx71AUs=
   </data>
  </layer>
  <layer id="5" name="Foreground" width="100" height="100">
