@@ -136,6 +136,66 @@ class InstructionView(arcade.View):
             arcade.close_window()
 
 
+class LevelOverView(arcade.View):
+    """ View to show when game is over """
+
+    def __init__(self, game_view):
+        """ This is run once when we switch to this view """
+        super().__init__()
+        self.game_view = game_view
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+        self.selected = 1
+
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+
+        if self.selected == 1:
+            arcade.draw_text("Next Level", 450, 285, arcade.csscolor.WHITE, 75)
+        else:
+            arcade.draw_text("Next Level", 500, 300, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 2:
+            arcade.draw_text("Back To Menu", 400, 115, arcade.csscolor.WHITE, 75)
+        else:
+            arcade.draw_text("Back To Menu", 470, 130, arcade.csscolor.WHITE, 50)
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+
+        if key == arcade.key.ENTER:
+            if self.selected == 1:
+                self.window.show_view(self.game_view)
+            elif self.selected == 2:
+                arcade.close_window()
+        if key == arcade.key.DOWN:
+            self.selected += 1
+            if self.selected > 2:
+                self.selected = 1
+        if key == arcade.key.UP:
+            self.selected -= 1
+            if self.selected < 1:
+                self.selected = 2
+
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
+        if 285 <= y <= 285 + 75 and 500 <= x <= 750:
+            self.selected = 1
+        elif 125 <= y <= 195 and 475 <= x <= 850:
+            self.selected = 2
+
+    def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
+        if 285 <= y <= 285 + 75 and 500 <= x <= 750:
+            self.window.show_view(self.game_view)
+        elif 125 <= y <= 195 and 475 <= x <= 850:
+            game_view = InstructionView()
+            self.window.show_view(game_view)
+
+
 class GameOverView(arcade.View):
     """ View to show when game is over """
 
@@ -742,7 +802,10 @@ class GameView(arcade.View):
                 view = GameOverView()
                 self.level = LEVEL_MAX
                 self.window.show_view(view)
-            self.setup(self.level)
+            else:
+                view = LevelOverView(self)
+                self.setup(self.level)
+                self.window.show_view(view)
 
             # Set the camera to the start
             self.view_left = 0
