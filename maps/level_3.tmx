@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="128" tileheight="128" infinite="0" backgroundcolor="#1e1e1e" nextlayerid="12" nextobjectid="1">
+ <tileset firstgid="1" source="images/tiles/Tiles.tsx"/>
+ <layer id="2" name="Background" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAIA6D+f4S3unZ0NpCQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANxNBQAAAAAAAICPFjIWAds=
+  </data>
+ </layer>
+ <layer id="3" name="Ladders" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer id="1" name="Platforms" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2FGKwjAARdEszaW5ES26EpemIkIQjFqS+rTnwIWBGfKRN5RqKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3HRodStq3fa9nskZU9srJHVvbIyh5Z2SMreyxe877tYY+VZ4+s7JHVyz32pWx+pYD7HL5HGeQw4PzrmQF3ao/qzIA7tUd1ZsCdDsseWdkjK3vkte/Y9HB39pi1R9fPCPXd2eOzPK+yskdW9sjKHlnZI6933193L/72sfv59RnT7fvk2e/T376rhfZ4+u46Ve+vu5nvv/UZl59PK/++vdnI59UI//68skdW9sjKHlnZI69e3+2Wjmf98/vuGv6nfil7ZGWPrOZ+rk7s23fZozNA8tto
+  </data>
+ </layer>
+ <layer id="11" name="Ladders" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt0bENwCAAxED2X4UlU1DRRiBc3E3weo8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMt8PYCNHi16tOjRokeLHvf8+VaPe059q9EZerTo0aJHix4terToAQCw+wCzBA6z
+  </data>
+ </layer>
+ <layer id="6" name="Don't Touch" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt16ENwDAQBEH3X0Sw3WVQsJm9imbok5MW/RgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHetzX0eWcFHjxY9WvRo0aNFDwAAAGjzm7fo0aJHix4tevQ9twcAwI+9pzALzQ==
+  </data>
+ </layer>
+ <layer id="4" name="Coins" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+ <layer id="7" name="Do Touch" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztzkEJADAMBLD69zEGVTkLfQyuj0RBqgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGC/kw7wxU0HAAAgqNMBAAAAAGDsAffyAfc=
+  </data>
+ </layer>
+ <layer id="5" name="Foreground" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+  </data>
+ </layer>
+</map>
