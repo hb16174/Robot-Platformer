@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.6.0" name="Tiles" tilewidth="128" tileheight="128" tilecount="12" columns="0">
+<tileset version="1.5" tiledversion="1.6.0" name="Tiles" tilewidth="128" tileheight="128" tilecount="13" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="156">
   <image width="128" height="128" source="ConcreteLeft.png"/>
@@ -24,6 +24,9 @@
  </tile>
  <tile id="164">
   <image width="128" height="128" source="Computer.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="6" x="29.25" y="48.5" width="72.5" height="78.25"/>
+  </objectgroup>
  </tile>
  <tile id="166">
   <properties>
@@ -48,5 +51,8 @@
    <property name="Type" type="int" value="2"/>
   </properties>
   <image width="128" height="128" source="OrangeBUtton.png"/>
+ </tile>
+ <tile id="170">
+  <image width="128" height="128" source="Ladder.png"/>
  </tile>
 </tileset>

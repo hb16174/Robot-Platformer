@@ -18,7 +18,7 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2OsJgzAYBdCM1tFcxEo7SUerBfuwWExATdKcA98fEYz3RhRDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACjHdcNh3ZZ56yPdkfnrYy5n9v/YR+789DGXO7/HnEM4xYw+9s97GCd2rZeIa9Vu7/xT8l6jj/S9v2X+3/SRL/sl+njPmEWXaYkvLfSxdo/PZ6EP4ZZtkZPW+yjhmfikD30crcQ+xu+Eblg43nof0/tjkwkJ5/66dsx3R+1i9lxNUzt9lEUfZekj/62WMC30cQdxbc+3
+   eJzt2H0KgjAcBuAdraN5EZM6SUfLyD4WhhO0be154PePCM73nSiGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHB3/rOpXe789BHLnZ8+Yrnz00csd376iOXO7zbHEA4po4/98x7GSV3rKeFatds7/zV5L9HH+r2/Zf6f9JEv+zn6eM2YRZdpiU8t9LF0j49noQ/hkm2Rk9b7KOGZeKcPffxaiX2M3wndMHO89T6m98cmE1ac++3aKd8dtUvZczVN7fRRFn2UpU/8t1rCtNDHFVkjC+Q=
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">

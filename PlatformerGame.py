@@ -39,10 +39,7 @@ RIGHT_FACING = 0
 LEFT_FACING = 1
 
 # LEVEL MAX
-LEVEL_MAX = 2
-
-# Button / Trigger types
-trigger_type = {}  # f"{arcade.load_texture('maps/images/tiles/BlueButton.png')}"}
+LEVEL_MAX = 3
 
 
 def load_texture_pair(filename):
@@ -456,6 +453,7 @@ class GameView(arcade.View):
 
         # Name of the layer in the file that has our platforms/walls
         platforms_layer_name = 'Platforms'
+
         moving_platforms_layer_name = 'Moving Platforms'
         foreground_layer_name = "Foreground"
         # Name of the layer that has items for pick-up
