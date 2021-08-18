@@ -8,7 +8,7 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztnGtygyAURllalpaNmEz6q+4iSyum0N4SUYkSP+w5M3eSTFCEIw9JBucAAAAAAAAAAAAAAAAAAAAAAAAA2udjo7g5d97qXC1ELfCBjyNELfCBjyNELfCBjyNELfCBjyNELfCBjyNELfDRlo+Lc6cYcz5sWvVo0cdQxxWzlsaXHR9C4EMLfGiBDy3woQU+tMCHFvjQAh9a4EMLfGiBDy3wocVUveDj/eBDC3xogQ8t8KGFoo+a+aqDDy0UfdBf4UMFfGih6IPxAx8q4EMLfGiBDy3woQU+tMCHFvjQAh9a4EMLfGiBDy0Uffzn9V3+D6cFPrRoyUe/Qb6de+w18BPXDc65JYo+hriEdJ1x07syJ7buXXidcp+6inl/FuS5FmEfj/0lfJ3c4zHexT1ElqFOr7/vZ/ev8GlPLpPe5m2uoSqKPoZ7NrYFW37//hR8nHP1cnOvjz+163oJqj6GPiIXwdNTOxm+8/f73d7zJfQj7cGe+x2o+sgdV7NeaB/4SFH0keZr50elUXKcK0w/d/7uhXFM1cfe+4ZtEXZ+5se085JnHUUfaX+l0I+sZek8Q9FHmu8RfCylpF72yndqHtoycT3AjjON+DgU0UMsqx1nVH3YGBsHr9/7ikqvDUY697cNDGNJbk1G1UdujSliyzSVbg/sGlr4PLoWNoaij5Z+/4jt1Nb/mjLgYx1xfhqveW0ZFH2E/mrRs3TKFs/rU2nS79JrLinDWHn28jH33EPgo4WoBT60fCz5LZV4jlo+vgAwUpr4
+   eJzt2WFO2zAYBmAfjaNxkQyxX+MWPdoCNJvntYlDbPo5eh7pE6oIce2XxI6TEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwLqfjeo1pedW5xqhepGHPM5QvchDHmeoXuQhjzNUL/KQxxmqF3nI4wzVizzGyuNHSk9LbeWRHxu9RszjfYw7Nh3a3Hd5BCKPWEbK461Bu1P6mJv+1EuDc7YUMY/rfP5hyrLZm0c+9un6cy37MqvpAddp1DzKbGr/n6fsmKlivTMf+5TuHD9/vjTrcKWoedSM3y2v6evzz9r1N7f7/B33toh5rI3nr/Q5bnNdbo3fPGaXrczueVu5Ho6cd48R8+ilxXrhKHn8JY/tdsv10d7a83dlm0fP/5X1WdQ8Hr3P1KLy9VnteiBiHuX9KsJ95Kja9UDEPMp2z5BHrT3j8qh219ahI1v2A/J5ZpA8TmXJYelrPs9EzSOvW/Pgy+d7qNB7g4sp/XsNvM8l9/ZkouaxtUeS96l2L+W75Hto18/Ve2ER8xjp/cdynebjf6QP8jhmWZ8u3/loHyLmcb1fVT1Ll1o8r68dU/6u/M57+nCrP4/KY+u5R8ljhOpFHrHyqHmXqv6vXnn8Bno7FAw=
   </data>
  </layer>
  <layer id="3" name="Ladders" width="100" height="100">
@@ -18,17 +18,17 @@
  </layer>
  <layer id="6" name="Don't Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2DEOwCAIAED+/w370K4OrVEbW0zvEjbAhQGMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgNxK0l4AwLuOzftnUaqImN+PRurq91b0BwCA3f3lHtmFe2RMz/y2csz/tXITPXVPclbN/8zfAAB87QS4sBHb
+   eJzt2DEOgDAIAED+/w18qLNGTVu1tvEu6QZ0YQAiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYGw5aC0AoK9l8vqjyNjORK3zUU3e/s+n6wMAwOz+so/Mwj5Sp6R/r2L0/7E8eSV5d2Le6v+W2wAAfG0F5PcROA==
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzqENACAMAMHuvwiBKTE1uKJacZe8/wgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAf6t7gMfOAKY73QMAAAAAAAAFF1ksAqQ=
+   eJztzrEJAAAIwDD/f0TwShcPcBMhge6NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgB9yAgD+qusBAAAAAACAhQav2QH5
   </data>
  </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt0UENACAMBMGTXis88MkTB7QJMwo22QQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+tpLqbuDyY6bdHQAAAADw0AFzDQLo
+   eJztzjEBAAAIA6D172FPG+zUBxKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA33wEAAACAQwuZoQCm
   </data>
  </layer>
  <layer id="5" name="Foreground" width="100" height="100">
