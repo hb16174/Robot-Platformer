@@ -39,7 +39,7 @@ RIGHT_FACING = 0
 LEFT_FACING = 1
 
 # LEVEL MAX
-LEVEL_MAX = 3
+LEVEL_MAX = 4
 
 
 def load_texture_pair(filename):
