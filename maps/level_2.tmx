@@ -13,7 +13,7 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2lFKw0AYhdF/aVmaG4miT7qLLM2EUKxSYhsH5iaeA99LkcbOLVZbqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALa9SZIkSTt6rhp61/sMUnqteqoA8/fR/SwSskdW9sjKHlnZIyt7ZGWPrOyRlT2yskdW9sjKHlnZIyt7ZGWPr/a+79/q84Llfsaq6a9nOa739a26cdtWLZ5XvfdM2aH34zlqZ99h/p6mxl0+v2x9v9OZd1hq/Tr4/uDXf7S8+C+Sd/hPexxhh6A9ppbXv7j+Xan3GR9sjybXvz7/Re9zPfAew57rnOX8A/e46/o//1brfW4n3mO4dftZn//39Mj7AVtVw/tKf6x7e6mM97i0tvw8skdO9shq2WMM+D98rc2vH8Mnu72CCQ==
+   eJzt2lFKw0AYhdF/aVmaG4miT7qLLM2EUKxSYhsH5iaeA99LkaadK1ZbqwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALa9SZIkSTt6rhp61/sMUnqteqoA8+PofhYJ2SMre2Rlj6zskZU9srJHVvbIyh5Z2SMre2Rlj6zskZU9srLHV3vf92/1ecFyP2PV9NezHNf7+lbduG2rFt9XvfdM2aH38zlqZ99hfkxT4y6fX7a+3+nMOyy1fh18f/DrP1pe/BfJO/ynPY6wQ9AeU8vrX1z/rtT7jA+2R5PrX5//ove5HniPYc91znL+gXvcdf2ff6v1PrcT7zHcuv2s3//39Mj7AVtVw69Pf657e6mM97i0tvw8skdO9shq2WMM+D98rc2vH8MnRvGBaw==
   </data>
  </layer>
  <layer id="6" name="Don't Touch" width="100" height="100">

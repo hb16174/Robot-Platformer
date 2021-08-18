@@ -20,8 +20,8 @@ SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
 
 # Movement speed of player, in pixels per frame
-PLAYER_MOVEMENT_SPEED = 10
-GRAVITY = 1.5
+PLAYER_MOVEMENT_SPEED = 8.5
+GRAVITY = 1.7
 PLAYER_JUMP_SPEED = 30
 
 # How many pixels to keep as a minimum margin between the character
@@ -31,7 +31,7 @@ RIGHT_VIEWPORT_MARGIN = 450
 BOTTOM_VIEWPORT_MARGIN = 150
 TOP_VIEWPORT_MARGIN = 100
 
-PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 10  # 3
+PLAYER_START_X = SPRITE_PIXEL_SIZE * TILE_SCALING * 10
 PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 4
 
 # Constants used to track if the player is facing left or right
@@ -743,7 +743,7 @@ class GameView(arcade.View):
                     if "Type" not in wall.properties:
                         pass
                     else:
-                        if int(coin.properties['Type']) == trigger:
+                        if int(wall.properties['Type']) == trigger:
                             wall.remove_from_sprite_lists()
 
             # Remove the coin

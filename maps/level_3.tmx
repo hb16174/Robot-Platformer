@@ -13,27 +13,22 @@
  </layer>
  <layer id="1" name="Platforms" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt2FGKwjAARdEszaW5ES26EpemIkIQjFqS+rTnwIWBGfKRN5RqKQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG3HRodStq3fa9nskZU9srJHVvbIyh5Z2SMreyxe877tYY+VZ4+s7JHVyz32pWx+pYD7HL5HGeQw4PzrmQF3ao/qzIA7tUd1ZsCdDsseWdkjK3vkte/Y9HB39pi1R9fPCPXd2eOzPK+yskdW9sjKHlnZI6933193L/72sfv59RnT7fvk2e/T376rhfZ4+u46Ve+vu5nvv/UZl59PK/++vdnI59UI//68skdW9sjKHlnZI69e3+2Wjmf98/vuGv6nfil7ZGWPrOZ+rk7s23fZozNA8tto
-  </data>
- </layer>
- <layer id="11" name="Ladders" width="100" height="100">
-  <data encoding="base64" compression="zlib">
-   eJzt0bENwCAAxED2X4UlU1DRRiBc3E3weo8BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMt8PYCNHi16tOjRokeLHvf8+VaPe059q9EZerTo0aJHix4terToAQCw+wCzBA6z
+   eJzt2m9ugjAcgOEezaPtIki2T9stPNok6sJqpfJn7Ic8T9JkCYLoq01tlhIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMCwj4HxntLb0PGtjS3QIxY9YtEjFj1i0SMWPWLRIxY9YtEjFj1i0SOWWo9jSoetjD30eHTeV+W6n5Xj75XrT9FdU48yPabRIxY9YtEjFj1iqa0Rjw9GGjhWOt5mz6tH2RM9Zv8uaFI65c+rR9nU+WqO9vq7X497a/doe3swetxbs0eb7YfpcW+tHnkLPcrW6FFqoUdZbX01VnvZE/611h26fls5t7RW7jSFxy39Wv7D0q+h/xl9Zi18fq8Pt3PPf59qj7lpnthff7UeU+aT/nu64G0W1eanvfbo5pn+nFLbK5mjP0/5fpR134n+nPKXPcZ+J/bYI7dkj+Yyfu5Dj/GW7JHvc+25x3WNNHqkieeVRn4fU1tspcecz9vWxhboEYsesTQB/o9tqfEKPb4Bg88ZxQ==
   </data>
  </layer>
  <layer id="6" name="Don't Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJzt16ENwDAQBEH3X0Sw3WVQsJm9imbok5MW/RgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHetzX0eWcFHjxY9WvRo0aNFDwAAAGjzm7fo0aJHix4tevQ9twcAwI+9pzALzQ==
+   eJzt2EEJAAAIBMHrX8OihhBEZOa7DTYBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4JMadgAAAAAA7vF2AWBXA9UaAeo=
   </data>
  </layer>
  <layer id="4" name="Coins" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztwTEBAAAAwqD1T+1lC6AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAbnEAAAQ==
+   eJztzjENAAAIAzD8GyFBJRa42NMqaBUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAj04HAAAgaNIBAAAAAOBsAepvAVI=
   </data>
  </layer>
  <layer id="7" name="Do Touch" width="100" height="100">
   <data encoding="base64" compression="zlib">
-   eJztzkEJADAMBLD69zEGVTkLfQyuj0RBqgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGC/kw7wxU0HAAAgqNMBAAAAAGDsAffyAfc=
+   eJztzgENAAAIA6D372FPY9xNSEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9007AAAAAAAAAAC8sanDAKY=
   </data>
  </layer>
  <layer id="5" name="Foreground" width="100" height="100">
