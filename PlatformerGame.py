@@ -101,7 +101,7 @@ class InstructionView(arcade.View):
         if key == arcade.key.ENTER:
             if self.selected == 1:
                 game_view = GameView()
-                game_view.setup(4)
+                game_view.setup(1)
                 self.window.show_view(game_view)
             elif self.selected == 3:
                 arcade.close_window()
