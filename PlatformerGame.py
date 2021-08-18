@@ -423,7 +423,7 @@ class GameView(arcade.View):
         # Load sounds
         self.collect_coin_sound = arcade.load_sound("sounds/coin1.wav")
         self.jump_sound = arcade.load_sound("sounds/jump1.wav")
-        self.game_over = arcade.load_sound("sounds/gameover1.wav")
+        self.game_over = arcade.load_sound("sounds/dead.wav")
 
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
@@ -803,6 +803,10 @@ class GameView(arcade.View):
             else:
                 view = LevelOverView(self)
                 self.setup(self.level)
+                self.left_pressed = False
+                self.right_pressed = False
+                self.up_pressed = False
+                self.down_pressed = False
                 self.window.show_view(view)
 
             # Set the camera to the start

@@ -18,6 +18,9 @@
  </tile>
  <tile id="162">
   <image width="128" height="128" source="ConcreteElectric.png"/>
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0.666667" y="-8.33333" width="128" height="136.667"/>
+  </objectgroup>
  </tile>
  <tile id="163">
   <image width="128" height="128" source="ConcreteZap.png"/>
