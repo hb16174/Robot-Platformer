@@ -20,7 +20,7 @@ SPRITE_PIXEL_SIZE = 128
 GRID_PIXEL_SIZE = (SPRITE_PIXEL_SIZE * TILE_SCALING)
 
 # Movement speed of player, in pixels per frame
-PLAYER_MOVEMENT_SPEED = 8.5
+PLAYER_MOVEMENT_SPEED = 8
 GRAVITY = 1.7
 PLAYER_JUMP_SPEED = 30
 
@@ -86,7 +86,7 @@ class InstructionView(arcade.View):
             arcade.draw_text("Start", 30, 400, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            arcade.draw_text(" Credits ", 10, 185, arcade.csscolor.WHITE, 75)
+            arcade.draw_text(" Credits", 10, 185, arcade.csscolor.WHITE, 75)
         else:
             arcade.draw_text("Credits", 30, 200, arcade.csscolor.WHITE, 50)
 
@@ -248,13 +248,13 @@ class GameOverView(arcade.View):
                 self.selected = 2
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
-        if 285 <= y <= 285 + 75 and 450 <= x <= 450+200:
+        if 285 <= y <= 285 + 75 and 450 <= x <= 450 + 200:
             self.selected = 1
-        elif 230 <= y <= 230 + 75 and 500 <= x <= 500+200:
+        elif 230 <= y <= 230 + 75 and 500 <= x <= 500 + 200:
             self.selected = 2
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
-        if 285 <= y <= 285 + 75 and 450 <= x <= 450+200:
+        if 285 <= y <= 285 + 75 and 450 <= x <= 450 + 200:
             game_view = InstructionView()
             self.window.show_view(game_view)
         elif 230 <= y <= 230 + 75 and 500 <= x <= 500 + 200:
@@ -421,8 +421,8 @@ class GameView(arcade.View):
         self.tutorial = "Null"
 
         # Load sounds
-        self.collect_coin_sound = arcade.load_sound("sounds/coin1.wav")
-        self.jump_sound = arcade.load_sound("sounds/jump1.wav")
+        self.collect_coin_sound = print("collect")  # arcade.load_sound("sounds/coin1.wav")
+        self.jump_sound = print("jump")  # arcade.load_sound("sounds/jump1.wav")
         self.game_over = arcade.load_sound("sounds/dead.wav")
 
     def setup(self, level):
@@ -596,24 +596,22 @@ class GameView(arcade.View):
         # self.player_sprite.draw_hit_box(arcade.color.RED, 3)
         if self.debug:
             # Draw hit boxes.
-            for wall in self.wall_list:
-                wall.draw_hit_box(arcade.color.BLACK, 3)
 
             self.player_sprite.draw_hit_box(arcade.color.RED, 3)
 
             # Display timings
             output = f"Processing time: {self.processing_time:.3f}"
             arcade.draw_text(output, 10 + self.view_left, 620 + self.view_bottom,
-                             arcade.csscolor.BLACK, 18)
+                             arcade.csscolor.RED, 18)
 
             output = f"Drawing time: {self.draw_time:.3f}"
             arcade.draw_text(output, 10 + self.view_left, 600 + self.view_bottom,
-                             arcade.csscolor.BLACK, 18)
+                             arcade.csscolor.RED, 18)
 
             if self.fps is not None:
                 output = f"FPS: {self.fps:.0f}"
                 arcade.draw_text(output, 10 + self.view_left, 580 + self.view_bottom,
-                                 arcade.csscolor.BLACK, 18)
+                                 arcade.csscolor.RED, 18)
 
     def process_keychange(self):
         """
