@@ -59,9 +59,13 @@ class InstructionView(arcade.View):
         """ This is run once when we switch to this view """
         super().__init__()
 
+        # Load textures
         self.texture = arcade.load_texture("maps/images/views/gamestart.png")
         self.char = arcade.load_texture("maps/images/person/Person_idle.png")
         self.health = arcade.load_texture("maps/images/person/health_3.png")
+
+        # Load sounds
+        self.select_sound = arcade.load_sound("sounds/select.wav")
 
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
@@ -107,20 +111,28 @@ class InstructionView(arcade.View):
                 arcade.close_window()
         if key == arcade.key.DOWN:
             self.selected += 1
+            arcade.play_sound(self.select_sound)
             if self.selected > 3:
                 self.selected = 1
         if key == arcade.key.UP:
             self.selected -= 1
+            arcade.play_sound(self.select_sound)
             if self.selected < 1:
                 self.selected = 3
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         if 385 <= y <= 385 + 75 and 10 <= x <= 200:
-            self.selected = 1
+            if self.selected != 1:
+                self.selected = 1
+                arcade.play_sound(self.select_sound)
         elif 185 <= y <= 185 + 75 and 10 <= x <= 200:
-            self.selected = 2
+            if self.selected != 2:
+                self.selected = 2
+                arcade.play_sound(self.select_sound)
         if 35 <= y <= 35 + 75 and 10 <= x <= 200:
-            self.selected = 3
+            if self.selected != 3:
+                self.selected = 3
+                arcade.play_sound(self.select_sound)
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         if 385 <= y <= 385 + 75 and 10 <= x <= 200:
