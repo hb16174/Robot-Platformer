@@ -84,6 +84,7 @@ class InstructionView(arcade.View):
         arcade.draw_text("Up / Down Keys", 860, 400, arcade.csscolor.WHITE, 25)
         arcade.draw_text("Enter", 860, 360, arcade.csscolor.WHITE, 25)
 
+        #
         if self.selected == 1:
             arcade.draw_text(" Start ", 10, 385, arcade.csscolor.WHITE, 75)
         else:
@@ -433,8 +434,8 @@ class GameView(arcade.View):
         self.tutorial = "Null"
 
         # Load sounds
-        self.collect_coin_sound = print("collect")  # arcade.load_sound("sounds/coin1.wav")
-        self.jump_sound = print("jump")  # arcade.load_sound("sounds/jump1.wav")
+        self.collect_coin_sound = arcade.load_sound("sounds/dead.wav")
+        self.jump_sound = arcade.load_sound("sounds/dead.wav")
         self.game_over = arcade.load_sound("sounds/dead.wav")
 
     def setup(self, level):
