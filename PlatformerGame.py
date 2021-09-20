@@ -472,8 +472,8 @@ class GameView(arcade.View):
         self.tutorial = "Null"
 
         # Load sounds
-        self.collect_coin_sound = arcade.load_sound("sounds/dead.wav")
-        self.jump_sound = arcade.load_sound("sounds/dead.wav")
+        self.collect_coin_sound = arcade.load_sound("sounds/collect.wav")
+        self.jump_sound = arcade.load_sound("sounds/jump.wav")
         self.game_over = arcade.load_sound("sounds/dead.wav")
 
     def setup(self, level):
