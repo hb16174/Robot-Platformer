@@ -154,6 +154,9 @@ class LevelOverView(arcade.View):
         super().__init__()
         self.game_view = game_view
 
+        # load the select sound
+        self.select_sound = arcade.load_sound("sounds/select.wav")
+
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
         arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
@@ -185,18 +188,24 @@ class LevelOverView(arcade.View):
                 arcade.close_window()
         if key == arcade.key.DOWN:
             self.selected += 1
+            arcade.play_sound(self.select_sound)
             if self.selected > 2:
                 self.selected = 1
         if key == arcade.key.UP:
             self.selected -= 1
+            arcade.play_sound(self.select_sound)
             if self.selected < 1:
                 self.selected = 2
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         if 285 <= y <= 285 + 75 and 500 <= x <= 750:
-            self.selected = 1
+            if not self.selected == 1:
+                arcade.play_sound(self.select_sound)
+                self.selected = 1
         elif 125 <= y <= 195 and 475 <= x <= 850:
-            self.selected = 2
+            if not self.selected == 2:
+                arcade.play_sound(self.select_sound)
+                self.selected = 2
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         if 285 <= y <= 285 + 75 and 500 <= x <= 750:
@@ -213,6 +222,9 @@ class GameOverView(arcade.View):
         """ This is run once when we switch to this view """
         super().__init__()
         self.texture = arcade.load_texture("maps/images/views/gameover.png")
+
+        # load the select sound
+        self.select_sound = arcade.load_sound("sounds/select.wav")
 
         # Reset the viewport, necessary if we have a scrolling game and we need
         # to reset the viewport back to the start so we can see what we draw.
@@ -253,18 +265,24 @@ class GameOverView(arcade.View):
                 arcade.close_window()
         if key == arcade.key.DOWN:
             self.selected += 1
+            arcade.play_sound(self.select_sound)
             if self.selected > 2:
                 self.selected = 1
         if key == arcade.key.UP:
             self.selected -= 1
+            arcade.play_sound(self.select_sound)
             if self.selected < 1:
                 self.selected = 2
 
     def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
         if 285 <= y <= 285 + 75 and 450 <= x <= 450 + 200:
-            self.selected = 1
+            if not self.selected == 1:
+                arcade.play_sound(self.select_sound)
+                self.selected = 1
         elif 230 <= y <= 230 + 75 and 500 <= x <= 500 + 200:
-            self.selected = 2
+            if not self.selected == 2:
+                arcade.play_sound(self.select_sound)
+                self.selected = 2
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         if 285 <= y <= 285 + 75 and 450 <= x <= 450 + 200:
