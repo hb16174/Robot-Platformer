@@ -110,6 +110,114 @@ class InstructionView(arcade.View):
                 game_view = GameView()
                 game_view.setup(1)
                 self.window.show_view(game_view)
+            elif self.selected == 2:
+                arcade.play_sound(self.click_sound)
+                game_view = LevelSelectView()
+                self.window.show_view(game_view)
+            elif self.selected == 3:
+                arcade.play_sound(self.click_sound)
+                arcade.close_window()
+            else:
+                arcade.play_sound(self.click_sound)
+        if key == arcade.key.DOWN:
+            self.selected += 1
+            arcade.play_sound(self.select_sound)
+            if self.selected > 3:
+                self.selected = 1
+        if key == arcade.key.UP:
+            self.selected -= 1
+            arcade.play_sound(self.select_sound)
+            if self.selected < 1:
+                self.selected = 3
+
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
+        if 385 <= y <= 385 + 75 and 10 <= x <= 200:
+            if self.selected != 1:
+                self.selected = 1
+                arcade.play_sound(self.select_sound)
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 325:
+            if self.selected != 2:
+                self.selected = 2
+                arcade.play_sound(self.select_sound)
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            if self.selected != 3:
+                self.selected = 3
+                arcade.play_sound(self.select_sound)
+
+    def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
+        if 385 <= y <= 385 + 75 and 10 <= x <= 200:
+            arcade.play_sound(self.click_sound)
+            game_view = GameView()
+            game_view.setup(1)
+            self.window.show_view(game_view)
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 325:
+            arcade.play_sound(self.click_sound)
+            game_view = LevelSelectView()
+            self.window.show_view(game_view)
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            arcade.play_sound(self.click_sound)
+            arcade.close_window()
+
+
+class LevelSelectView(arcade.View):
+    """ View to show instructions """
+
+    def __init__(self):
+        """ This is run once when we switch to this view """
+        super().__init__()
+
+        # Load textures
+        self.texture = arcade.load_texture("maps/images/views/gamestart.png")
+        self.char = arcade.load_texture("maps/images/person/Person_idle.png")
+        self.health = arcade.load_texture("maps/images/person/health_3.png")
+
+        # Load the menu sounds
+        self.select_sound = arcade.load_sound("sounds/select.wav")
+        self.click_sound = arcade.load_sound("sounds/click.wav")
+
+        # Reset the viewport, necessary if we have a scrolling game and we need
+        # to reset the viewport back to the start so we can see what we draw.
+        arcade.set_viewport(0, SCREEN_WIDTH - 1, 0, SCREEN_HEIGHT - 1)
+        self.selected = 1
+        self.choice = 1
+
+    def on_draw(self):
+        """ Draw this view """
+        arcade.start_render()
+        self.texture.draw_sized(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2,
+                                SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.char.draw_sized(SCREEN_WIDTH / 1.25, SCREEN_HEIGHT / 3.29,
+                             96, 128)
+
+        arcade.draw_text("", 850, 440, arcade.csscolor.WHITE, 30)
+        arcade.draw_text("", 860, 400, arcade.csscolor.WHITE, 25)
+        arcade.draw_text("", 860, 360, arcade.csscolor.WHITE, 25)
+
+        #
+        if self.selected == 1:
+            arcade.draw_text("Back", 10, 385, arcade.csscolor.WHITE, 75)
+        else:
+            arcade.draw_text("Back", 30, 400, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 2:
+            arcade.draw_text(f" Level {self.choice}", 460, 315, arcade.csscolor.WHITE, 75)
+        else:
+            arcade.draw_text(f"Level {self.choice}", 490, 330, arcade.csscolor.WHITE, 50)
+
+        if self.selected == 3:
+            arcade.draw_text(" Quit ", 30, 35, arcade.csscolor.BLACK, 75)
+        else:
+            arcade.draw_text("Quit", 30, 50, arcade.csscolor.BLACK, 50)
+
+    def on_key_press(self, key, modifiers):
+        """Called whenever a key is pressed. """
+
+        if key == arcade.key.ENTER:
+            if self.selected == 1:
+                arcade.play_sound(self.click_sound)
+                game_view = GameView()
+                game_view.setup(1)
+                self.window.show_view(game_view)
             elif self.selected == 3:
                 arcade.play_sound(self.click_sound)
                 arcade.close_window()
