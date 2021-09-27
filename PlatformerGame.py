@@ -92,9 +92,9 @@ class InstructionView(arcade.View):
             arcade.draw_text("Start", 30, 400, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            arcade.draw_text(" Credits", 10, 185, arcade.csscolor.WHITE, 75)
+            arcade.draw_text(" Level Select", 10, 185, arcade.csscolor.WHITE, 75)
         else:
-            arcade.draw_text("Credits", 30, 200, arcade.csscolor.WHITE, 50)
+            arcade.draw_text("Level Select", 30, 200, arcade.csscolor.WHITE, 50)
 
         if self.selected == 3:
             arcade.draw_text(" Quit ", 30, 35, arcade.csscolor.BLACK, 75)
@@ -131,7 +131,7 @@ class InstructionView(arcade.View):
             if self.selected != 1:
                 self.selected = 1
                 arcade.play_sound(self.select_sound)
-        elif 185 <= y <= 185 + 75 and 10 <= x <= 200:
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 325:
             if self.selected != 2:
                 self.selected = 2
                 arcade.play_sound(self.select_sound)
@@ -146,7 +146,7 @@ class InstructionView(arcade.View):
             game_view = GameView()
             game_view.setup(1)
             self.window.show_view(game_view)
-        elif 185 <= y <= 185 + 75 and 10 <= x <= 200:
+        elif 185 <= y <= 185 + 75 and 10 <= x <= 325:
             arcade.play_sound(self.click_sound)
             self.selected = 2
         if 35 <= y <= 35 + 75 and 10 <= x <= 200:
