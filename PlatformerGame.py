@@ -215,8 +215,7 @@ class LevelSelectView(arcade.View):
         if key == arcade.key.ENTER:
             if self.selected == 1:
                 arcade.play_sound(self.click_sound)
-                game_view = GameView()
-                game_view.setup(1)
+                game_view = InstructionView()
                 self.window.show_view(game_view)
             elif self.selected == 3:
                 arcade.play_sound(self.click_sound)
@@ -304,7 +303,8 @@ class LevelOverView(arcade.View):
                 self.window.show_view(self.game_view)
             elif self.selected == 2:
                 arcade.play_sound(self.click_sound)
-                arcade.close_window()
+                game_view = InstructionView()
+                self.window.show_view(game_view)
         if key == arcade.key.DOWN:
             self.selected += 1
             arcade.play_sound(self.select_sound)
