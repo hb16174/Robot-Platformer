@@ -191,7 +191,7 @@ class LevelSelectView(arcade.View):
         self.char.draw_sized(SCREEN_WIDTH / 1.25, SCREEN_HEIGHT / 3.29,
                              96, 128)
 
-        arcade.draw_text(f" Level {self.choice}", 460, 285, arcade.csscolor.WHITE, 75)
+        arcade.draw_text(f" Level", 460, 285, arcade.csscolor.WHITE, 75)
 
         #
         if self.selected == 1:
@@ -205,11 +205,16 @@ class LevelSelectView(arcade.View):
             self.arrow_up.draw_sized(721, 401, 24, 26)
 
         if self.selected == 3:
+            arcade.draw_text(f"{self.choice}", 695, 283, arcade.csscolor.WHITE, 80)
+        else:
+            arcade.draw_text(f"{self.choice}", 700, 290, arcade.csscolor.WHITE, 65)
+
+        if self.selected == 4:
             self.arrow_down.draw_sized(721, 277, 34, 40)
         else:
             self.arrow_down.draw_sized(721, 277, 24, 26)
 
-        if self.selected == 4:
+        if self.selected == 5:
             arcade.draw_text(" Quit ", 30, 35, arcade.csscolor.BLACK, 75)
         else:
             arcade.draw_text("Quit", 30, 50, arcade.csscolor.BLACK, 50)
@@ -228,9 +233,14 @@ class LevelSelectView(arcade.View):
                     self.choice += 1
             elif self.selected == 3:
                 arcade.play_sound(self.click_sound)
+                game_view = GameView()
+                game_view.setup(self.choice)
+                self.window.show_view(game_view)
+            elif self.selected == 4:
+                arcade.play_sound(self.click_sound)
                 if not self.choice < 2:
                     self.choice -= 1
-            elif self.selected == 4:
+            elif self.selected == 5:
                 arcade.play_sound(self.click_sound)
                 arcade.close_window()
             else:
@@ -238,7 +248,7 @@ class LevelSelectView(arcade.View):
         if key == arcade.key.DOWN:
             self.selected += 1
             arcade.play_sound(self.select_sound)
-            if self.selected > 4:
+            if self.selected > 5:
                 self.selected = 1
         if key == arcade.key.UP:
             self.selected -= 1
@@ -255,13 +265,17 @@ class LevelSelectView(arcade.View):
             if self.selected != 2:
                 self.selected = 2
                 arcade.play_sound(self.select_sound)
-        if 267 <= y <= 267 + 35 and 700 <= x <= 730:
+        if 300 <= y <= 300 + 75 and 685 <= x <= 730:
             if self.selected != 3:
                 self.selected = 3
                 arcade.play_sound(self.select_sound)
-        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+        if 267 <= y <= 267 + 30 and 700 <= x <= 730:
             if self.selected != 4:
                 self.selected = 4
+                arcade.play_sound(self.select_sound)
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            if self.selected != 5:
+                self.selected = 5
                 arcade.play_sound(self.select_sound)
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
@@ -273,6 +287,11 @@ class LevelSelectView(arcade.View):
             arcade.play_sound(self.click_sound)
             if not self.choice > 3:
                 self.choice += 1
+        if 300 <= y <= 300 + 75 and 685 <= x <= 730:
+            arcade.play_sound(self.click_sound)
+            game_view = GameView()
+            game_view.setup(self.choice)
+            self.window.show_view(game_view)
         if 267 <= y <= 267 + 35 and 700 <= x <= 730:
             arcade.play_sound(self.click_sound)
             if not self.choice < 2:
