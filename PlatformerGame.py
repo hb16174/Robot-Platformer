@@ -267,8 +267,7 @@ class LevelSelectView(arcade.View):
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
         if 385 <= y <= 385 + 75 and 10 <= x <= 200:
             arcade.play_sound(self.click_sound)
-            game_view = GameView()
-            game_view.setup(1)
+            game_view = InstructionView()
             self.window.show_view(game_view)
         if 390 <= y <= 390 + 35 and 700 <= x <= 730:
             arcade.play_sound(self.click_sound)
