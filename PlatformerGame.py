@@ -200,14 +200,14 @@ class LevelSelectView(arcade.View):
             arcade.draw_text("Back", 30, 400, arcade.csscolor.WHITE, 50)
 
         if self.selected == 2:
-            self.arrow_up.draw_sized(723, 401, 34, 34)
+            self.arrow_up.draw_sized(721, 401, 34, 40)
         else:
-            self.arrow_up.draw_sized(723, 401, 24, 24)
+            self.arrow_up.draw_sized(721, 401, 24, 26)
 
         if self.selected == 3:
-            self.arrow_down.draw_sized(723, 280, 34, 34)
+            self.arrow_down.draw_sized(721, 277, 34, 40)
         else:
-            self.arrow_down.draw_sized(723, 280, 24, 24)
+            self.arrow_down.draw_sized(721, 277, 24, 26)
 
         if self.selected == 4:
             arcade.draw_text(" Quit ", 30, 35, arcade.csscolor.BLACK, 75)
@@ -251,13 +251,17 @@ class LevelSelectView(arcade.View):
             if self.selected != 1:
                 self.selected = 1
                 arcade.play_sound(self.select_sound)
-        elif 270 <= y <= 270 + 75 and 460 <= x <= 660:
+        if 390 <= y <= 390 + 35 and 700 <= x <= 730:
             if self.selected != 2:
                 self.selected = 2
                 arcade.play_sound(self.select_sound)
-        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+        if 267 <= y <= 267 + 35 and 700 <= x <= 730:
             if self.selected != 3:
                 self.selected = 3
+                arcade.play_sound(self.select_sound)
+        if 35 <= y <= 35 + 75 and 10 <= x <= 200:
+            if self.selected != 4:
+                self.selected = 4
                 arcade.play_sound(self.select_sound)
 
     def on_mouse_press(self, x: float, y: float, button: int, modifiers: int):
@@ -266,9 +270,14 @@ class LevelSelectView(arcade.View):
             game_view = GameView()
             game_view.setup(1)
             self.window.show_view(game_view)
-        elif 270 <= y <= 270 + 75 and 460 <= x <= 660:
+        if 390 <= y <= 390 + 35 and 700 <= x <= 730:
             arcade.play_sound(self.click_sound)
-            self.selected = 2
+            if not self.choice > 3:
+                self.choice += 1
+        if 267 <= y <= 267 + 35 and 700 <= x <= 730:
+            arcade.play_sound(self.click_sound)
+            if not self.choice < 2:
+                self.choice -= 1
         if 35 <= y <= 35 + 75 and 10 <= x <= 200:
             arcade.play_sound(self.click_sound)
             arcade.close_window()
