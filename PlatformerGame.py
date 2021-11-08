@@ -38,8 +38,9 @@ PLAYER_START_Y = SPRITE_PIXEL_SIZE * TILE_SCALING * 4
 RIGHT_FACING = 0
 LEFT_FACING = 1
 
-# LEVEL MAX
+# LEVELS
 LEVEL_MAX = 4
+_level = 1
 
 
 def load_texture_pair(filename):
@@ -627,6 +628,9 @@ class GameView(arcade.View):
     def setup(self, level):
         """ Set up the game here. Call this function to restart the game. """
 
+        # Updates the self.level variable to the game level
+        self.level = level
+
         # Used to keep track of our scrolling
         self.view_bottom = 0
         self.view_left = 0
@@ -768,24 +772,24 @@ class GameView(arcade.View):
         # Draw our health on the screen, scrolling it with the character
         self.health_texture.draw_sized(self.player_sprite.center_x + 1.5, self.player_sprite.center_y + 16,
                                        25, 10)
-
-        # Keep track of tutorial text
-        if self.tutorial_num == 0:
-            self.tutorial = "Use A and D keys to move"
-        elif self.tutorial_num == 1:
-            self.tutorial = "Use W or Up key to jump"
-        elif self.tutorial_num == 2:
-            self.tutorial = "Find the the computer to finish the level"
-        else:
-            self.tutorial = ""
+        if _level == 1:
+            # Keep track of tutorial text
+            if self.tutorial_num == 0:
+                self.tutorial = "Use A and D keys to move"
+            elif self.tutorial_num == 1:
+                self.tutorial = "Use W or Up key to jump"
+            elif self.tutorial_num == 2:
+                self.tutorial = "Find the the computer to finish the level"
+            else:
+                self.tutorial = ""
 
         # Draw tutorial text
         tutorial_text = f"{self.tutorial}"
         arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
         # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
-        if self.level == 1:
+        if _level == 1:
             arcade.draw_text("Don't Touch Marked Objects", 1200, 235, arcade.csscolor.RED, 25)
-        elif self.level == 2:
+        elif _level == 2:
             arcade.draw_text("Coloured Buttons react with same coloured objects", 1200, 235, arcade.csscolor.BLUE, 25)
 
         # Draw hit boxes.
