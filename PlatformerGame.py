@@ -790,20 +790,16 @@ class GameView(arcade.View):
         # Draw tutorial text
         tutorial_text = f"{self.tutorial}"
         arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
-        # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
+
+        # This draws tutorial text based on which level you're playing
         if self.level == 1:
             arcade.draw_text("Don't Touch Marked Objects", 1200, 235, arcade.csscolor.RED, 25)
         elif self.level == 2:
             arcade.draw_text("Coloured Buttons react with same coloured objects", 1200, 235, arcade.csscolor.BLUE, 25)
 
-        # Draw hit boxes.
-        # for wall in self.wall_list:
-        #     wall.draw_hit_box(arcade.color.BLACK, 3)
-        #
-        # self.player_sprite.draw_hit_box(arcade.color.RED, 3)
+        # Triggered when self.debug is true
         if self.debug:
             # Draw hit boxes.
-
             self.player_sprite.draw_hit_box(arcade.color.RED, 3)
 
             # Display timings
