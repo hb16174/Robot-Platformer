@@ -617,8 +617,12 @@ class GameView(arcade.View):
         # Keep track of the score
         self.score = 0
         # Keep track of tutorial text
-        self.tutorial_num = 0
-        self.tutorial = "Null"
+        if self.level == 1:
+            self.tutorial_num = 0
+            self.tutorial = ""
+        else:
+            self.tutorial_num = 3
+            self.tutorial = ""
 
         # Load sounds
         self.collect_coin_sound = arcade.load_sound("sounds/collect.wav")
@@ -772,7 +776,7 @@ class GameView(arcade.View):
         # Draw our health on the screen, scrolling it with the character
         self.health_texture.draw_sized(self.player_sprite.center_x + 1.5, self.player_sprite.center_y + 16,
                                        25, 10)
-        if _level == 1:
+        if self.level == 1:
             # Keep track of tutorial text
             if self.tutorial_num == 0:
                 self.tutorial = "Use A and D keys to move"
@@ -787,9 +791,9 @@ class GameView(arcade.View):
         tutorial_text = f"{self.tutorial}"
         arcade.draw_text(tutorial_text, 20 + self.view_left, 550 + self.view_bottom, arcade.csscolor.WHITE, 25)
         # arcade.draw_text(tutorial_text, SCREEN_WIDTH / 4, 400 + self.view_bottom, arcade.csscolor.WHITE, 18)
-        if _level == 1:
+        if self.level == 1:
             arcade.draw_text("Don't Touch Marked Objects", 1200, 235, arcade.csscolor.RED, 25)
-        elif _level == 2:
+        elif self.level == 2:
             arcade.draw_text("Coloured Buttons react with same coloured objects", 1200, 235, arcade.csscolor.BLUE, 25)
 
         # Draw hit boxes.
