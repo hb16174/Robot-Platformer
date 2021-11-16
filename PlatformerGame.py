@@ -194,7 +194,7 @@ class LevelSelectView(arcade.View):
 
         arcade.draw_text(f" Level", 460, 285, arcade.csscolor.WHITE, 75)
 
-        #
+        # 
         if self.selected == 1:
             arcade.draw_text("Back", 10, 385, arcade.csscolor.WHITE, 75)
         else:
@@ -621,7 +621,7 @@ class GameView(arcade.View):
             self.tutorial_num = 0
             self.tutorial = ""
         else:
-            self.tutorial_num = 3
+            self.tutorial_num = 4
             self.tutorial = ""
 
         # Load sounds
@@ -784,8 +784,8 @@ class GameView(arcade.View):
                 self.tutorial = "Use W or Up key to jump"
             elif self.tutorial_num == 2:
                 self.tutorial = "Find the the computer to finish the level"
-            else:
-                self.tutorial = ""
+        else:
+            self.tutorial = ""
 
         # Draw tutorial text
         tutorial_text = f"{self.tutorial}"
@@ -993,7 +993,7 @@ class GameView(arcade.View):
                                                 self.do_touch_list):
             # Advance to the next level
             if self.level == 1:
-                self.tutorial_num += 1
+                self.tutorial_num == 4
             self.level += 1
 
             # Load the next level
@@ -1061,7 +1061,6 @@ def main():
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     start_view = InstructionView()
     window.show_view(start_view)
-    # window.setup(window.level)
     arcade.run()
 
 
